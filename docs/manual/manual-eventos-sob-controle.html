@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Manual do Sistema - Eventos Sob Controle</title>
+<style>
+  @page { size: A4; margin: 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: #160f16; background: #fff8fb; line-height: 1.45; }
+  .cover { min-height: 250mm; display: flex; flex-direction: column; justify-content: center; gap: 18px; page-break-after: always; }
+  .eyebrow { color: #c82868; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; }
+  h1 { font-size: 42px; line-height: 1.05; margin: 0; }
+  h2 { font-size: 24px; margin: 0 0 8px; page-break-after: avoid; }
+  h3 { font-size: 16px; margin: 18px 0 8px; }
+  p { margin: 0 0 10px; font-size: 13px; }
+  ul { margin: 8px 0 0 18px; padding: 0; font-size: 13px; }
+  li { margin: 4px 0; }
+  .box { border: 1px solid #eadce3; background: #fff; border-radius: 10px; padding: 16px; margin: 14px 0; }
+  .credentials { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .credential { border: 1px solid #eadce3; background: #fff; border-radius: 10px; padding: 14px; }
+  code { font-family: Arial, Helvetica, sans-serif; background: #fff0f6; padding: 2px 5px; border-radius: 5px; }
+  .screen { page-break-inside: avoid; margin: 0 0 18px; padding-top: 8px; }
+  .screen img { display: block; width: 100%; border: 1px solid #eadce3; border-radius: 8px; background: white; margin-top: 10px; }
+  .page-break { page-break-before: always; }
+  .small { font-size: 11px; color: #6b5f67; }
+  .toc { columns: 2; }
+</style>
+</head>
+<body>
+<section class="cover">
+  <div class="eyebrow">Manual de uso</div>
+  <h1>Eventos Sob Controle</h1>
+  <p>Guia completo para acesso, uso do financeiro, cadastro de eventos/clientes e administração de alunas.</p>
+  <div class="box">
+    <p><strong>Endereço do sistema:</strong> https://eventos-omega-five.vercel.app/</p>
+    <p><strong>Data do manual:</strong> 24/09/2026</p>
+  </div>
+</section>
+
+<section class="page-break">
+  <h2>Contas Para Teste</h2>
+  <p>Use estas contas para validar o sistema antes de liberar o uso definitivo.</p>
+  <div class="credentials">
+    <div class="credential">
+      <h3>Conta da aluna</h3>
+      <p><strong>E-mail:</strong> <code>teste.shirley.eventos@teste.local</code></p>
+      <p><strong>Senha:</strong> <code>ShirleyTeste@2026</code></p>
+      <p>Acesso às telas de início, eventos, financeiro, clientes e configurações.</p>
+    </div>
+    <div class="credential">
+      <h3>Conta admin</h3>
+      <p><strong>E-mail:</strong> <code>admin.shirley.eventos@teste.local</code></p>
+      <p><strong>Senha:</strong> <code>ShirleyAdmin@2026</code></p>
+      <p>Acesso às telas administrativas de alunas, status de acesso e logs.</p>
+    </div>
+  </div>
+  <div class="box">
+    <p><strong>Observação:</strong> essas contas são para homologação/teste. Para uso real, o ideal é criar a conta final da Shirley com e-mail definitivo e trocar a senha inicial.</p>
+  </div>
+</section>
+
+<section class="page-break">
+  <h2>Resumo das Funções</h2>
+  <div class="toc">
+    <ul>
+      <li>Login com validação de erro.</li>
+      <li>Dashboard financeiro da aluna.</li>
+      <li>Cadastro e acompanhamento de eventos.</li>
+      <li>Cadastro de clientes.</li>
+      <li>Registro de recebimentos e despesas.</li>
+      <li>Cadastro de contas/caixas.</li>
+      <li>Distribuição percentual do resultado.</li>
+      <li>Painel administrativo de alunas.</li>
+      <li>Convite de novas alunas.</li>
+      <li>Suspensão, carência, reativação e arquivamento de acesso.</li>
+      <li>Logs administrativos.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="page-break">
+  <h2>Passo a Passo</h2>
+  <div class="box">
+    <h3>Fluxo principal da aluna</h3>
+    <ul>
+      <li>Entrar com e-mail e senha.</li>
+      <li>Cadastrar clientes quando necessário.</li>
+      <li>Criar um novo evento com valor de venda e datas.</li>
+      <li>Registrar recebimentos e despesas no financeiro.</li>
+      <li>Acompanhar resultado, gráficos e distribuição na tela inicial.</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h3>Fluxo administrativo</h3>
+    <ul>
+      <li>Acessar com conta admin.</li>
+      <li>Conferir total de alunas e status no painel.</li>
+      <li>Adicionar nova aluna pelo formulário de convite.</li>
+      <li>Entrar no detalhe da aluna para alterar status de acesso.</li>
+      <li>Consultar logs para acompanhar ações administrativas.</li>
+    </ul>
+  </div>
+</section>
+
+
+<section class="screen page-break">
+  <h2>Acesso ao sistema</h2>
+  <p>Entre pelo endereço https://eventos-omega-five.vercel.app/ usando e-mail e senha. Se os dados estiverem incorretos, o sistema mostra a mensagem de erro e mantém a pessoa na tela de login.</p>
+  <img src="screenshots/01-login.png" alt="Acesso ao sistema">
+</section>
+
+<section class="screen page-break">
+  <h2>Mensagem de erro no login</h2>
+  <p>Quando e-mail ou senha estiverem incorretos, aparece o aviso: “E-mail ou senha incorretos. Confira os dados e tente novamente.”</p>
+  <img src="screenshots/02-login-erro.png" alt="Mensagem de erro no login">
+</section>
+
+<section class="screen page-break">
+  <h2>Início da aluna</h2>
+  <p>Mostra a visão geral do financeiro: vendido, recebido, a receber, resultado, quantidade de eventos, ticket médio, gráficos mensais e sugestão de distribuição do resultado.</p>
+  <img src="screenshots/07-app-dashboard.png" alt="Início da aluna">
+</section>
+
+<section class="screen page-break">
+  <h2>Eventos</h2>
+  <p>Lista os eventos cadastrados. Use esta tela para acompanhar vendas, status e histórico dos eventos.</p>
+  <img src="screenshots/08-app-eventos.png" alt="Eventos">
+</section>
+
+<section class="screen page-break">
+  <h2>Novo evento</h2>
+  <p>Cadastro de uma venda/evento. Informe cliente, serviço, data da venda, data do evento, valor e dados financeiros iniciais para o sistema calcular recebimentos e custos.</p>
+  <img src="screenshots/09-app-novo-evento.png" alt="Novo evento">
+</section>
+
+<section class="screen page-break">
+  <h2>Clientes</h2>
+  <p>Cadastro e consulta de clientes. Os clientes são usados na criação dos eventos para manter o histórico organizado.</p>
+  <img src="screenshots/10-app-clientes.png" alt="Clientes">
+</section>
+
+<section class="screen page-break">
+  <h2>Financeiro</h2>
+  <p>Registre recebimentos e despesas, consulte movimentações, cadastre contas/caixas e ajuste os percentuais de distribuição do resultado.</p>
+  <img src="screenshots/11-app-financeiro.png" alt="Financeiro">
+</section>
+
+<section class="screen page-break">
+  <h2>Configurações</h2>
+  <p>Área de ajustes da conta/workspace. No MVP, concentra informações básicas e preferências disponíveis para a aluna.</p>
+  <img src="screenshots/12-app-configuracoes.png" alt="Configurações">
+</section>
+
+<section class="screen page-break">
+  <h2>Admin: visão geral</h2>
+  <p>Painel administrativo com total de alunas, ativas, em carência, suspensas, novas no mês e últimos acessos.</p>
+  <img src="screenshots/03-admin-dashboard.png" alt="Admin: visão geral">
+</section>
+
+<section class="screen page-break">
+  <h2>Admin: alunas</h2>
+  <p>Lista de alunas com status, data de criação e último acesso. Clique em uma aluna para gerenciar o acesso.</p>
+  <img src="screenshots/04-admin-alunas.png" alt="Admin: alunas">
+</section>
+
+<section class="screen page-break">
+  <h2>Admin: adicionar aluna</h2>
+  <p>Cria convite para uma nova aluna. O sistema cria o workspace, perfil e estrutura financeira inicial.</p>
+  <img src="screenshots/05-admin-nova-aluna.png" alt="Admin: adicionar aluna">
+</section>
+
+<section class="screen page-break">
+  <h2>Admin: detalhe da aluna</h2>
+  <p>Permite alterar status de acesso: reativar, colocar em carência, suspender ou arquivar.</p>
+  <img src="screenshots/06-admin-detalhe-aluna.png" alt="Admin: detalhe da aluna">
+</section>
+
+<section class="screen page-break">
+  <h2>Admin: logs</h2>
+  <p>Registra ações administrativas importantes para auditoria.</p>
+  <img src="screenshots/06b-admin-logs.png" alt="Admin: logs">
+</section>
+
+<section class="page-break">
+  <h2>Boas Práticas de Uso</h2>
+  <ul>
+    <li>Não compartilhar senha entre pessoas.</li>
+    <li>Registrar recebimentos e despesas assim que acontecerem para manter o painel atualizado.</li>
+    <li>Usar a tela de clientes para evitar duplicidade de nomes.</li>
+    <li>Manter os percentuais de distribuição revisados conforme a estratégia financeira.</li>
+    <li>Em caso de acesso indevido ou inadimplência, usar o status da aluna no painel admin.</li>
+  </ul>
+  <p class="small">Manual gerado com screenshots do ambiente publicado em produção.</p>
+</section>
+</body>
+</html>
