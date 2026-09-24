@@ -1,0 +1,10 @@
+node_modules
+node_modules_broken_*
+.next
+out
+.env
+.env*.local
+!.env.example
+coverage
+.scaffold_tmp_path
+tsconfig.tsbuildinfo
