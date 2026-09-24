@@ -1,4 +1,5 @@
 import { updateStudentStatus } from "@/features/admin/actions";
+import { getStudent } from "@/features/admin/queries";
 import { requireAdmin } from "@/lib/auth/guards";
 import { PageHeader } from "@/components/layout/page-header";
 import { Card } from "@/components/ui/card";
@@ -8,11 +9,7 @@ import { Button } from "@/components/ui/button";
 export default async function StudentDetailPage({ params }: { params: Promise<{ userId: string }> }) {
   const { userId } = await params;
   const { supabase } = await requireAdmin();
-  const { data: student } = await supabase
-    .from("event_fin_profiles")
-    .select("*, event_fin_workspace_members(workspace_id, event_fin_workspaces(*))")
-    .eq("id", userId)
-    .single();
+  const student = await getStudent(supabase, userId);
   const workspace = (student as any)?.event_fin_workspace_members?.[0]?.event_fin_workspaces;
   async function setSuspended() { "use server"; await updateStudentStatus(userId, "suspended"); }
   async function setActive() { "use server"; await updateStudentStatus(userId, "active"); }
