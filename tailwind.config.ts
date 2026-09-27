@@ -8,7 +8,7 @@ const config: Config = {
         event: {
           ink: "#120C12",
           paper: "#FFF8FB",
-          rose: "#F45B92"
+          rose: "#BE185D"
         }
       },
       fontFamily: {

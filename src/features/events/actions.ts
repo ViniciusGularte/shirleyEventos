@@ -1,28 +1,30 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 import { requireStudentWorkspace } from "@/lib/auth/guards";
 import { parseMoney } from "@/lib/finance/currency";
+import { errorState, validationState, type ActionState } from "@/lib/actions/state";
 
 const eventSchema = z.object({
-  client_id: z.string().uuid(),
+  client_id: z.string().uuid("Selecione um cliente."),
   service_id: z.string().uuid().optional().nullable(),
-  service_name_snapshot: z.string().min(2),
+  service_name_snapshot: z.string().min(2, "Selecione um serviço."),
   title: z.string().optional(),
-  sale_date: z.string().min(10),
+  sale_date: z.string().min(10, "Informe a data da venda."),
   event_date: z.string().optional().nullable(),
-  sale_amount: z.number().min(0),
-  received_now: z.number().min(0).default(0),
-  initial_cost: z.number().min(0).default(0),
+  sale_amount: z.number({ invalid_type_error: "Informe um valor de venda válido." }).positive("O valor vendido deve ser maior que zero."),
+  received_now: z.number({ invalid_type_error: "Informe um valor recebido válido." }).min(0, "O valor não pode ser negativo.").default(0),
+  initial_cost: z.number({ invalid_type_error: "Informe um custo válido." }).min(0, "O custo não pode ser negativo.").default(0),
   wallet_id: z.string().uuid().optional().nullable(),
   notes: z.string().optional()
 });
 
-export async function createEvent(formData: FormData) {
+export async function createEvent(_state: ActionState, formData: FormData): Promise<ActionState> {
   const { supabase, workspaceId } = await requireStudentWorkspace();
-  const input = eventSchema.parse({
-    client_id: formData.get("client_id"),
+  const parsed = eventSchema.safeParse({
+    client_id: formData.get("client_id") ?? "",
     service_id: formData.get("service_id") || null,
     service_name_snapshot: formData.get("service_name_snapshot"),
     title: formData.get("title") || undefined,
@@ -34,13 +36,15 @@ export async function createEvent(formData: FormData) {
     wallet_id: formData.get("wallet_id") || null,
     notes: formData.get("notes") || undefined
   });
+  if (!parsed.success) return validationState(parsed.error);
+  const input = parsed.data;
 
   const { data: event, error } = await supabase
     .from("event_fin_events")
     .insert({ ...input, workspace_id: workspaceId })
     .select("id")
     .single();
-  if (error) throw new Error("Não foi possível criar o evento.");
+  if (error) return errorState("Não foi possível criar o evento. Confira os dados e tente novamente.");
 
   if (input.received_now > 0) {
     const { error: incomeError } = await supabase.from("event_fin_transactions").insert({
@@ -53,7 +57,7 @@ export async function createEvent(formData: FormData) {
       payment_method: "pix",
       description: "Recebimento inicial"
     });
-    if (incomeError) throw new Error("Evento criado, mas falhou ao criar recebimento inicial.");
+    if (incomeError) redirect(`/app/eventos/${event.id}?aviso=recebimento`);
   }
 
   if (input.initial_cost > 0) {
@@ -73,27 +77,32 @@ export async function createEvent(formData: FormData) {
       occurred_at: input.sale_date,
       description: "Custo de equipe inicial"
     });
-    if (expenseError) throw new Error("Evento criado, mas falhou ao criar custo inicial.");
+    if (expenseError) redirect(`/app/eventos/${event.id}?aviso=custo`);
   }
 
   revalidatePath("/app/eventos");
   revalidatePath("/app");
+  redirect(`/app/eventos/${event.id}?criado=1`);
 }
 
-export async function markEventCompleted(eventId: string) {
+export async function markEventCompleted(eventId: string, _state: ActionState, _formData: FormData): Promise<ActionState> {
   const { supabase, workspaceId } = await requireStudentWorkspace();
   const { error } = await supabase.from("event_fin_events").update({ status: "completed" }).eq("workspace_id", workspaceId).eq("id", eventId);
-  if (error) throw new Error("Não foi possível completar o evento.");
+  if (error) return errorState("Não foi possível concluir o evento. Tente novamente.");
   revalidatePath("/app/eventos");
+  revalidatePath(`/app/eventos/${eventId}`);
+  redirect(`/app/eventos/${eventId}?status=concluido`);
 }
 
-export async function cancelEvent(eventId: string) {
+export async function cancelEvent(eventId: string, _state: ActionState, _formData: FormData): Promise<ActionState> {
   const { supabase, workspaceId } = await requireStudentWorkspace();
   const { error } = await supabase
     .from("event_fin_events")
     .update({ status: "cancelled", cancelled_at: new Date().toISOString() })
     .eq("workspace_id", workspaceId)
     .eq("id", eventId);
-  if (error) throw new Error("Não foi possível cancelar o evento.");
+  if (error) return errorState("Não foi possível cancelar o evento. Tente novamente.");
   revalidatePath("/app/eventos");
+  revalidatePath(`/app/eventos/${eventId}`);
+  redirect(`/app/eventos/${eventId}?status=cancelado`);
 }

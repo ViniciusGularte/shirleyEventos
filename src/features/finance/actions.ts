@@ -1,13 +1,15 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 import { requireStudentWorkspace } from "@/lib/auth/guards";
 import { parseMoney } from "@/lib/finance/currency";
+import { errorState, validationState, type ActionState } from "@/lib/actions/state";
 
 const transactionSchema = z.object({
-  amount: z.number().positive(),
-  occurred_at: z.string().min(10),
+  amount: z.number({ invalid_type_error: "Informe um valor válido." }).positive("O valor deve ser maior que zero."),
+  occurred_at: z.string().min(10, "Informe a data da movimentação."),
   event_id: z.string().uuid().optional().nullable(),
   wallet_id: z.string().uuid().optional().nullable(),
   category_id: z.string().uuid().optional().nullable(),
@@ -15,9 +17,9 @@ const transactionSchema = z.object({
   description: z.string().optional()
 });
 
-export async function createIncome(formData: FormData) {
+export async function createIncome(_state: ActionState, formData: FormData): Promise<ActionState> {
   const { supabase, workspaceId } = await requireStudentWorkspace();
-  const input = transactionSchema.parse({
+  const parsed = transactionSchema.safeParse({
     amount: parseMoney(formData.get("amount")),
     occurred_at: formData.get("occurred_at"),
     event_id: formData.get("event_id") || null,
@@ -25,15 +27,17 @@ export async function createIncome(formData: FormData) {
     payment_method: formData.get("payment_method") || "pix",
     description: formData.get("description") || undefined
   });
-  const { error } = await supabase.from("event_fin_transactions").insert({ ...input, workspace_id: workspaceId, type: "income" });
-  if (error) throw new Error("Não foi possível salvar recebimento.");
+  if (!parsed.success) return validationState(parsed.error);
+  const { error } = await supabase.from("event_fin_transactions").insert({ ...parsed.data, workspace_id: workspaceId, type: "income" });
+  if (error) return errorState("Não foi possível salvar o recebimento. Confira os dados e tente novamente.");
   revalidatePath("/app/financeiro");
   revalidatePath("/app");
+  redirect("/app/financeiro?salvo=recebimento");
 }
 
-export async function createExpense(formData: FormData) {
+export async function createExpense(_state: ActionState, formData: FormData): Promise<ActionState> {
   const { supabase, workspaceId } = await requireStudentWorkspace();
-  const input = transactionSchema.extend({ category_id: z.string().uuid() }).parse({
+  const parsed = transactionSchema.extend({ category_id: z.string().uuid("Selecione uma categoria.") }).safeParse({
     amount: parseMoney(formData.get("amount")),
     occurred_at: formData.get("occurred_at"),
     event_id: formData.get("event_id") || null,
@@ -41,10 +45,12 @@ export async function createExpense(formData: FormData) {
     category_id: formData.get("category_id"),
     description: formData.get("description") || undefined
   });
-  const { error } = await supabase.from("event_fin_transactions").insert({ ...input, workspace_id: workspaceId, type: "expense" });
-  if (error) throw new Error("Não foi possível salvar despesa.");
+  if (!parsed.success) return validationState(parsed.error);
+  const { error } = await supabase.from("event_fin_transactions").insert({ ...parsed.data, workspace_id: workspaceId, type: "expense" });
+  if (error) return errorState("Não foi possível salvar a despesa. Confira os dados e tente novamente.");
   revalidatePath("/app/financeiro");
   revalidatePath("/app");
+  redirect("/app/financeiro?salvo=despesa");
 }
 
 export async function deleteTransaction(transactionId: string) {
@@ -55,28 +61,32 @@ export async function deleteTransaction(transactionId: string) {
   revalidatePath("/app");
 }
 
-export async function createWallet(formData: FormData) {
+export async function createWallet(_state: ActionState, formData: FormData): Promise<ActionState> {
   const { supabase, workspaceId } = await requireStudentWorkspace();
-  const input = z.object({
-    name: z.string().min(2),
+  const parsed = z.object({
+    name: z.string().trim().min(2, "Informe um nome com pelo menos 2 caracteres."),
     type: z.enum(["cash", "bank", "digital", "other"]),
-    opening_balance: z.number()
-  }).parse({
+    opening_balance: z.number({ invalid_type_error: "Informe um saldo inicial válido." })
+  }).safeParse({
     name: formData.get("name"),
     type: formData.get("type") || "cash",
     opening_balance: parseMoney(formData.get("opening_balance"))
   });
-  const { error } = await supabase.from("event_fin_wallets").insert({ ...input, workspace_id: workspaceId });
-  if (error) throw new Error("Não foi possível criar conta.");
+  if (!parsed.success) return validationState(parsed.error);
+  const { error } = await supabase.from("event_fin_wallets").insert({ ...parsed.data, workspace_id: workspaceId });
+  if (error) return errorState("Não foi possível criar a conta. Use outro nome ou tente novamente.");
   revalidatePath("/app/financeiro");
+  redirect("/app/financeiro?salvo=conta");
 }
 
-export async function updateAllocationRules(formData: FormData) {
+export async function updateAllocationRules(_state: ActionState, formData: FormData): Promise<ActionState> {
   const { supabase, workspaceId } = await requireStudentWorkspace();
-  const names = formData.getAll("name").map(String);
+  const names = formData.getAll("name").map((value) => String(value).trim());
   const percentages = formData.getAll("percentage").map((value) => Number(value));
+  if (names.some((name) => name.length < 2)) return { status: "error", message: "Dê um nome para cada destino da distribuição.", fieldErrors: { name: ["Use pelo menos 2 caracteres."] } };
+  if (percentages.some((value) => !Number.isFinite(value) || value < 0 || value > 100)) return { status: "error", message: "Revise os percentuais destacados.", fieldErrors: { percentage: ["Use um valor entre 0 e 100."] } };
   const total = percentages.reduce((sum, value) => sum + value, 0);
-  if (total > 100) throw new Error("A soma não pode passar de 100%.");
+  if (total > 100) return { status: "error", message: `A soma atual é ${total.toLocaleString("pt-BR")}% e não pode passar de 100%.`, fieldErrors: { percentage: ["Reduza os percentuais para somar no máximo 100%."] } };
 
   const effectiveFrom = new Date();
   effectiveFrom.setDate(1);
@@ -85,7 +95,7 @@ export async function updateAllocationRules(formData: FormData) {
     .insert({ workspace_id: workspaceId, effective_from: effectiveFrom.toISOString().slice(0, 10) })
     .select("id")
     .single();
-  if (error) throw new Error("Não foi possível salvar distribuição.");
+  if (error) return errorState("Não foi possível salvar a distribuição. Tente novamente.");
 
   const { error: itemsError } = await supabase.from("event_fin_allocation_items").insert(
     names.map((name, index) => ({
@@ -95,7 +105,8 @@ export async function updateAllocationRules(formData: FormData) {
       sort_order: index
     }))
   );
-  if (itemsError) throw new Error("Não foi possível salvar itens da distribuição.");
+  if (itemsError) return errorState("A distribuição foi iniciada, mas os percentuais não foram salvos. Tente novamente.");
   revalidatePath("/app/financeiro");
   revalidatePath("/app");
+  redirect("/app/financeiro?salvo=distribuicao");
 }

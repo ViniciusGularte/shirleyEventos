@@ -27,11 +27,11 @@ export default async function DashboardPage() {
       <PageHeader
         title={`Olá, ${firstName}`}
         subtitle="Visão geral do seu financeiro"
-        action={<Link className="inline-flex min-h-12 items-center gap-2 rounded-[18px] bg-event-ink px-5 text-sm font-extrabold text-event-paper transition hover:bg-event-rose" href="/app/eventos/novo"><Plus size={18} /> Novo lançamento</Link>}
+        action={<Link className="focus-ring inline-flex min-h-12 items-center justify-center gap-2 rounded-[18px] bg-event-ink px-5 text-sm font-extrabold text-event-paper transition hover:bg-event-rose" href="/app/eventos/novo"><Plus size={18} /> Novo evento</Link>}
       />
       {metrics.event_count === 0 ? (
-        <EmptyState title="Seu financeiro começa pelo primeiro evento." action={<Link className="rounded-[18px] bg-event-ink px-5 py-3 text-sm font-bold text-event-paper" href="/app/eventos/novo">+ Cadastrar primeiro evento</Link>}>
-          Cadastre uma venda para acompanhar recebimentos, custos e resultado.
+        <EmptyState title="Seu financeiro começa com quatro passos simples." action={<Link className="focus-ring rounded-[18px] bg-event-ink px-5 py-3 text-sm font-bold text-event-paper" href="/app/boas-vindas">Abrir guia inicial</Link>}>
+          Cadastre cliente, evento e movimentações com um guia que acompanha seu progresso.
         </EmptyState>
       ) : null}
       <section className="grid grid-cols-2 gap-3 lg:grid-cols-4">

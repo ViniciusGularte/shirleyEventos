@@ -15,9 +15,9 @@ export default async function EventsPage() {
 
   return (
     <div className="grid gap-6">
-      <PageHeader title="Eventos" subtitle="Acompanhe vendas, clientes, recebimentos e resultado." action={<Link className="inline-flex min-h-12 items-center gap-2 rounded-[18px] bg-event-ink px-5 text-sm font-bold text-event-paper" href="/app/eventos/novo"><Plus size={18} /> Novo evento</Link>} />
+      <PageHeader title="Eventos" subtitle="Acompanhe vendas, clientes, recebimentos e resultado." action={<Link className="focus-ring inline-flex min-h-12 items-center justify-center gap-2 rounded-[18px] bg-event-ink px-5 text-sm font-bold text-event-paper transition hover:bg-event-rose" href="/app/eventos/novo"><Plus size={18} /> Novo evento</Link>} />
       {events.length === 0 ? (
-        <EmptyState title="Nenhum evento cadastrado." action={<Link className="rounded-[18px] bg-event-ink px-5 py-3 text-sm font-bold text-event-paper" href="/app/eventos/novo">+ Novo evento</Link>}>
+        <EmptyState title="Nenhum evento cadastrado." action={<Link className="focus-ring rounded-[18px] bg-event-ink px-5 py-3 text-sm font-bold text-event-paper" href="/app/eventos/novo">Novo evento</Link>}>
           Cadastre sua primeira venda para acompanhar recebimentos, custos e resultado.
         </EmptyState>
       ) : (
@@ -25,8 +25,8 @@ export default async function EventsPage() {
           {events.map((event: any) => {
             const fin = byId.get(event.id);
             return (
-              <Link href={`/app/eventos/${event.id}`} key={event.id}>
-                <Card className="grid gap-4 md:grid-cols-[1fr_repeat(4,130px)_110px] md:items-center">
+              <Link className="focus-ring block rounded-[22px]" href={`/app/eventos/${event.id}`} key={event.id}>
+                <Card className="grid gap-4 transition hover:-translate-y-0.5 hover:border-event-rose/30 hover:shadow-event xl:grid-cols-[minmax(180px,1fr)_repeat(4,minmax(100px,130px))_110px] xl:items-center">
                   <div>
                     <h2 className="font-extrabold">{event.title || event.event_fin_clients?.name}</h2>
                     <p className="text-sm text-event-ink/58">{event.service_name_snapshot}</p>

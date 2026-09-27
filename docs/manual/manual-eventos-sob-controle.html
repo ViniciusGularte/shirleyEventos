@@ -2,195 +2,495 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<title>Manual do Sistema - Eventos Sob Controle</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manual do Sistema — Eventos Sob Controle</title>
 <style>
-  @page { size: A4; margin: 14mm; }
+  @page {
+    size: A4;
+    margin: 14mm 13mm 17mm;
+    @bottom-left { content: "Eventos Sob Controle • Manual de uso"; color: #786b73; font-size: 8pt; }
+    @bottom-right { content: "Pág. " counter(page) " de " counter(pages); color: #786b73; font-size: 8pt; }
+  }
+  @page:first { @bottom-left { content: ""; } @bottom-right { content: ""; } }
   * { box-sizing: border-box; }
-  body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: #160f16; background: #fff8fb; line-height: 1.45; }
-  .cover { min-height: 250mm; display: flex; flex-direction: column; justify-content: center; gap: 18px; page-break-after: always; }
-  .eyebrow { color: #c82868; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; }
-  h1 { font-size: 42px; line-height: 1.05; margin: 0; }
-  h2 { font-size: 24px; margin: 0 0 8px; page-break-after: avoid; }
-  h3 { font-size: 16px; margin: 18px 0 8px; }
-  p { margin: 0 0 10px; font-size: 13px; }
-  ul { margin: 8px 0 0 18px; padding: 0; font-size: 13px; }
+  :root { --ink: #120c12; --paper: #fff8fb; --rose: #be185d; --line: #eadde4; --muted: #6f626a; --green: #047857; --amber: #a16207; --red: #b91c1c; }
+  html { background: white; }
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: var(--ink); background: white; line-height: 1.48; }
+  h1, h2, h3, h4, p { margin-top: 0; }
+  h1 { margin-bottom: 14px; font-size: 36pt; line-height: 1.02; letter-spacing: -1.8px; }
+  h2 { margin-bottom: 10px; font-size: 22pt; line-height: 1.12; letter-spacing: -.5px; }
+  h3 { margin-bottom: 7px; font-size: 14pt; line-height: 1.25; }
+  h4 { margin-bottom: 5px; font-size: 10.5pt; }
+  p, li, td, th { font-size: 9.5pt; }
+  p { margin-bottom: 8px; }
+  ul, ol { margin: 6px 0 0; padding-left: 20px; }
   li { margin: 4px 0; }
-  .box { border: 1px solid #eadce3; background: #fff; border-radius: 10px; padding: 16px; margin: 14px 0; }
-  .credentials { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .credential { border: 1px solid #eadce3; background: #fff; border-radius: 10px; padding: 14px; }
-  code { font-family: Arial, Helvetica, sans-serif; background: #fff0f6; padding: 2px 5px; border-radius: 5px; }
-  .screen { page-break-inside: avoid; margin: 0 0 18px; padding-top: 8px; }
-  .screen img { display: block; width: 100%; border: 1px solid #eadce3; border-radius: 8px; background: white; margin-top: 10px; }
-  .page-break { page-break-before: always; }
-  .small { font-size: 11px; color: #6b5f67; }
-  .toc { columns: 2; }
+  a { color: var(--rose); }
+  code { padding: 2px 5px; border-radius: 5px; background: #fce7f3; font: 8.5pt Arial, sans-serif; overflow-wrap: anywhere; }
+  .page { break-before: page; }
+  .avoid-break { break-inside: avoid; }
+  .cover { min-height: 265mm; margin: -14mm -13mm -17mm; padding: 24mm 19mm; display: flex; flex-direction: column; justify-content: space-between; background: radial-gradient(circle at 85% 15%, #fbcfe8 0, transparent 30%), linear-gradient(145deg, #fff8fb 0%, #fff 52%, #fce7f3 100%); }
+  .cover-mark { display: inline-flex; align-items: center; gap: 9px; font-size: 10pt; font-weight: 800; color: var(--rose); letter-spacing: .08em; text-transform: uppercase; }
+  .cover-dot { width: 13px; height: 13px; border-radius: 50%; background: var(--rose); box-shadow: 0 0 0 7px rgba(190,24,93,.12); }
+  .cover-copy { max-width: 155mm; }
+  .cover-subtitle { max-width: 135mm; color: var(--muted); font-size: 14pt; line-height: 1.5; }
+  .cover-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 145mm; }
+  .meta-card { padding: 13px 15px; border: 1px solid rgba(18,12,18,.1); border-radius: 14px; background: rgba(255,255,255,.75); }
+  .meta-card span { display: block; margin-bottom: 4px; color: var(--muted); font-size: 8pt; text-transform: uppercase; letter-spacing: .06em; }
+  .meta-card strong { font-size: 10pt; }
+  .section-kicker { margin-bottom: 7px; color: var(--rose); font-size: 8.5pt; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+  .lead { max-width: 165mm; color: var(--muted); font-size: 11pt; line-height: 1.55; }
+  .box { margin: 11px 0; padding: 13px 15px; border: 1px solid var(--line); border-radius: 13px; background: var(--paper); break-inside: avoid; }
+  .box.white { background: white; }
+  .box.tip { border-left: 4px solid var(--rose); }
+  .box.warning { border-left: 4px solid var(--amber); background: #fffbeb; }
+  .box.success { border-left: 4px solid var(--green); background: #ecfdf5; }
+  .box.danger { border-left: 4px solid var(--red); background: #fef2f2; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .credentials { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .credential { padding: 14px; border: 1px solid var(--line); border-radius: 13px; background: white; break-inside: avoid; }
+  .credential p { margin-bottom: 5px; }
+  .toc { display: grid; grid-template-columns: 1fr 1fr; gap: 7px 18px; margin-top: 18px; }
+  .toc-item { display: flex; justify-content: space-between; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 9.5pt; font-weight: 700; }
+  .toc-item span:first-child { color: var(--rose); }
+  .flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin: 14px 0; counter-reset: step; }
+  .flow-card { min-height: 87px; padding: 11px; border-radius: 12px; background: var(--ink); color: white; break-inside: avoid; }
+  .flow-card::before { counter-increment: step; content: counter(step); display: grid; place-items: center; width: 21px; height: 21px; margin-bottom: 8px; border-radius: 50%; background: var(--rose); font-size: 8pt; font-weight: 800; }
+  .flow-card strong { display: block; margin-bottom: 4px; font-size: 9pt; }
+  .flow-card small { color: rgba(255,255,255,.72); font-size: 7.7pt; line-height: 1.35; }
+  .steps { counter-reset: tutorial; list-style: none; padding: 0; }
+  .steps > li { position: relative; min-height: 28px; padding: 2px 0 10px 34px; counter-increment: tutorial; }
+  .steps > li::before { content: counter(tutorial); position: absolute; left: 0; top: 0; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--rose); color: white; font-weight: 800; }
+  .screen { margin: 13px 0 17px; break-inside: avoid; }
+  .screen img { display: block; width: 100%; max-height: 188mm; object-fit: contain; object-position: top; border: 1px solid var(--line); border-radius: 11px; background: var(--paper); }
+  .screen figcaption { margin-top: 6px; color: var(--muted); font-size: 8pt; text-align: center; }
+  .mobile-shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; align-items: start; margin-top: 12px; }
+  .mobile-shots figure { margin: 0; break-inside: avoid; }
+  .mobile-shots img { display: block; width: 100%; border: 1px solid var(--line); border-radius: 10px; }
+  .mobile-shots figcaption { margin-top: 5px; color: var(--muted); font-size: 7.5pt; text-align: center; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 14px; break-inside: avoid; }
+  th, td { padding: 7px 8px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+  th { background: var(--paper); font-weight: 800; }
+  .status { display: inline-block; padding: 3px 8px; border-radius: 999px; font-size: 8pt; font-weight: 800; }
+  .status.green { color: #065f46; background: #d1fae5; }
+  .status.amber { color: #92400e; background: #fef3c7; }
+  .status.red { color: #991b1b; background: #fee2e2; }
+  .checklist { list-style: none; padding-left: 0; columns: 2; column-gap: 20px; }
+  .checklist li { position: relative; padding-left: 20px; break-inside: avoid; }
+  .checklist li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 900; }
+  .small { color: var(--muted); font-size: 8pt; }
 </style>
 </head>
 <body>
+
 <section class="cover">
-  <div class="eyebrow">Manual de uso</div>
-  <h1>Eventos Sob Controle</h1>
-  <p>Guia completo para acesso, uso do financeiro, cadastro de eventos/clientes e administração de alunas.</p>
-  <div class="box">
-    <p><strong>Endereço do sistema:</strong> https://eventos-omega-five.vercel.app/</p>
-    <p><strong>Data do manual:</strong> 24/09/2026</p>
+  <div class="cover-mark"><span class="cover-dot"></span> Manual oficial de uso</div>
+  <div class="cover-copy">
+    <h1>Eventos<br>Sob Controle</h1>
+    <p class="cover-subtitle">Guia prático para organizar clientes, eventos, recebimentos, despesas e acesso das alunas — no computador e no celular.</p>
+  </div>
+  <div class="cover-meta">
+    <div class="meta-card"><span>Versão do manual</span><strong>27 de setembro de 2026</strong></div>
+    <div class="meta-card"><span>Endereço do sistema</span><strong>eventos-omega-five.vercel.app</strong></div>
+    <div class="meta-card"><span>Para alunas</span><strong>Rotina financeira e eventos</strong></div>
+    <div class="meta-card"><span>Para administração</span><strong>Convites, acessos e auditoria</strong></div>
   </div>
 </section>
 
-<section class="page-break">
-  <h2>Contas Para Teste</h2>
-  <p>Use estas contas para validar o sistema antes de liberar o uso definitivo.</p>
+<section class="page">
+  <div class="section-kicker">Antes de começar</div>
+  <h2>Como usar este manual</h2>
+  <p class="lead">Siga o fluxo rápido para começar em poucos minutos. Depois, consulte a seção de cada tela quando precisar entender um campo, uma métrica ou uma ação administrativa.</p>
+
+  <div class="toc">
+    <div class="toc-item"><span>01</span> Contas de teste</div>
+    <div class="toc-item"><span>02</span> Fluxo rápido da aluna</div>
+    <div class="toc-item"><span>03</span> Guia inicial e progresso</div>
+    <div class="toc-item"><span>04</span> Login e recuperação</div>
+    <div class="toc-item"><span>05</span> Validação e mensagens</div>
+    <div class="toc-item"><span>06</span> Painel inicial</div>
+    <div class="toc-item"><span>07</span> Clientes e eventos</div>
+    <div class="toc-item"><span>08</span> Financeiro</div>
+    <div class="toc-item"><span>09</span> Uso no celular</div>
+    <div class="toc-item"><span>10</span> Administração e boas práticas</div>
+  </div>
+
+  <div class="box tip">
+    <h3>Dica de navegação</h3>
+    <p>No computador, use o menu escuro à esquerda. No celular, use a barra fixa inferior. A opção destacada em rosa indica a área atual.</p>
+  </div>
+
+  <h3>Contas para homologação</h3>
   <div class="credentials">
     <div class="credential">
-      <h3>Conta da aluna</h3>
-      <p><strong>E-mail:</strong> <code>teste.shirley.eventos@teste.local</code></p>
+      <h4>Conta da aluna</h4>
+      <p><strong>E-mail:</strong><br><code>teste.shirley.eventos@teste.local</code></p>
       <p><strong>Senha:</strong> <code>ShirleyTeste@2026</code></p>
-      <p>Acesso às telas de início, eventos, financeiro, clientes e configurações.</p>
+      <p class="small">Acesso ao painel, eventos, financeiro, clientes e configurações.</p>
     </div>
     <div class="credential">
-      <h3>Conta admin</h3>
-      <p><strong>E-mail:</strong> <code>admin.shirley.eventos@teste.local</code></p>
+      <h4>Conta administrativa</h4>
+      <p><strong>E-mail:</strong><br><code>admin.shirley.eventos@teste.local</code></p>
       <p><strong>Senha:</strong> <code>ShirleyAdmin@2026</code></p>
-      <p>Acesso às telas administrativas de alunas, status de acesso e logs.</p>
+      <p class="small">Acesso às alunas, estados de acesso e logs.</p>
     </div>
   </div>
-  <div class="box">
-    <p><strong>Observação:</strong> essas contas são para homologação/teste. Para uso real, o ideal é criar a conta final da Shirley com e-mail definitivo e trocar a senha inicial.</p>
+  <div class="box warning"><strong>Importante:</strong> estas credenciais são somente para testes. Não compartilhe senhas reais e encerre a sessão em aparelhos de terceiros.</div>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Comece por aqui</div>
+  <h2>Fluxo rápido da aluna</h2>
+  <p class="lead">A ordem abaixo mantém o cadastro organizado e faz os indicadores do painel serem calculados corretamente.</p>
+  <div class="flow">
+    <div class="flow-card"><strong>Entrar</strong><small>Acesse com e-mail e senha.</small></div>
+    <div class="flow-card"><strong>Criar cliente</strong><small>Cadastre nome e contato.</small></div>
+    <div class="flow-card"><strong>Criar evento</strong><small>Informe serviço, datas e venda.</small></div>
+    <div class="flow-card"><strong>Lançar finanças</strong><small>Registre entradas e despesas.</small></div>
+    <div class="flow-card"><strong>Acompanhar</strong><small>Confira resultado e distribuição.</small></div>
+  </div>
+  <ol class="steps">
+    <li><strong>Entre no sistema.</strong> Use o endereço informado na capa e suas credenciais.</li>
+    <li><strong>Cadastre o cliente.</strong> Abra <em>Clientes</em>, preencha o nome e, se tiver, telefone e e-mail.</li>
+    <li><strong>Crie o evento.</strong> Abra <em>Eventos → Novo evento</em> e preencha os campos obrigatórios marcados com *.</li>
+    <li><strong>Registre as movimentações.</strong> Em <em>Financeiro</em>, relacione recebimentos e despesas ao evento e à conta correspondente.</li>
+    <li><strong>Confira o painel.</strong> Volte a <em>Início</em> para acompanhar vendido, recebido, valor a receber e resultado.</li>
+  </ol>
+  <div class="box success"><strong>Regra simples:</strong> registre cada movimentação assim que acontecer. O painel reflete os dados cadastrados e fica mais útil quando o histórico está atualizado.</div>
+
+  <h3>O que cada área faz</h3>
+  <table>
+    <thead><tr><th>Área</th><th>Use para</th><th>Ação mais comum</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Início</strong></td><td>Ver os principais números e gráficos.</td><td>Acompanhar resultado e distribuição.</td></tr>
+      <tr><td><strong>Eventos</strong></td><td>Organizar vendas e datas dos trabalhos.</td><td>Criar evento e acompanhar valores.</td></tr>
+      <tr><td><strong>Financeiro</strong></td><td>Registrar entradas, saídas, contas e percentuais.</td><td>Adicionar recebimento ou despesa.</td></tr>
+      <tr><td><strong>Clientes</strong></td><td>Manter contatos e histórico de vendas.</td><td>Cadastrar antes de criar o evento.</td></tr>
+      <tr><td><strong>Configurações</strong></td><td>Ver perfil, atalhos e sair com segurança.</td><td>Conferir o espaço de trabalho.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Primeiro acesso</div>
+  <h2>Guia inicial com progresso real</h2>
+  <p class="lead">Depois de criar a senha, a aluna chega a um guia curto. Ele não bloqueia o sistema: pode ser pulado e retomado pelas Configurações.</p>
+  <ol class="steps">
+    <li><strong>Cadastrar cliente.</strong> A etapa é concluída quando existe ao menos um cliente ativo.</li>
+    <li><strong>Criar evento.</strong> O progresso muda assim que a primeira venda/evento é salva.</li>
+    <li><strong>Organizar o financeiro.</strong> Um recebimento ou despesa conclui a etapa.</li>
+    <li><strong>Acompanhar o painel.</strong> O guia direciona para a leitura dos indicadores.</li>
+  </ol>
+  <div class="box tip"><strong>Liberdade para a usuária:</strong> “Pular por agora” leva ao painel sem perder o progresso. O atalho “Guia inicial” fica disponível em Configurações.</div>
+  <figure class="screen"><img src="screenshots/19-app-boas-vindas.png" alt="Guia inicial com quatro etapas e barra de progresso"><figcaption>Onboarding orientado por tarefas reais, sem tour obrigatório.</figcaption></figure>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Acesso</div>
+  <h2>Entrar e recuperar a senha</h2>
+  <div class="grid-2">
+    <div class="box white">
+      <h3>Entrar</h3>
+      <ol class="steps">
+        <li>Informe o e-mail cadastrado.</li>
+        <li>Digite a senha. O ícone de olho mostra ou oculta o texto.</li>
+        <li>Selecione <strong>Entrar</strong>.</li>
+      </ol>
+    </div>
+    <div class="box white">
+      <h3>Se a senha não funcionar</h3>
+      <ol class="steps">
+        <li>Confira letras maiúsculas e espaços.</li>
+        <li>Selecione <strong>Esqueci minha senha</strong>.</li>
+        <li>Informe o e-mail e use o link recebido.</li>
+      </ol>
+    </div>
+  </div>
+  <figure class="screen"><img src="screenshots/01-login.png" alt="Tela de login com campos de e-mail e senha"><figcaption>Tela de acesso no computador.</figcaption></figure>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Acesso • Continuação</div>
+  <h2>Mensagens de acesso</h2>
+  <p>Quando os dados estão incorretos, o sistema mostra uma mensagem acima do formulário. Corrija as informações e tente novamente.</p>
+  <figure class="screen"><img src="screenshots/02-login-erro.png" alt="Tela de login exibindo mensagem de e-mail ou senha incorretos"><figcaption>Erro de autenticação com orientação para correção.</figcaption></figure>
+  <div class="box tip"><strong>Não recebeu o e-mail?</strong> Verifique spam e lixo eletrônico, aguarde alguns minutos e confirme se digitou o endereço correto.</div>
+  <figure class="screen"><img src="screenshots/13-recuperar-senha.png" alt="Tela para solicitar link de recuperação de senha"><figcaption>Recuperação de senha disponível diretamente no login.</figcaption></figure>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Formulários e feedback</div>
+  <h2>O sistema explica o que precisa ser corrigido</h2>
+  <p class="lead">Ao enviar um formulário incompleto, a página permanece aberta, leva o foco para o aviso e mostra a causa logo abaixo de cada campo.</p>
+  <table>
+    <thead><tr><th>Situação</th><th>Resposta do sistema</th></tr></thead>
+    <tbody>
+      <tr><td>Campo obrigatório vazio</td><td>Destaca o controle e informa exatamente o que falta.</td></tr>
+      <tr><td>Valor inválido ou negativo</td><td>Orienta a informar um número válido e maior que zero quando necessário.</td></tr>
+      <tr><td>Falha ao salvar</td><td>Manté o formulário aberto e oferece uma mensagem para tentar novamente.</td></tr>
+      <tr><td>Envio em andamento</td><td>Desabilita o botão e mostra um indicador, evitando cadastros duplicados.</td></tr>
+      <tr><td>Ação sensível</td><td>Pede confirmação antes de cancelar, suspender ou arquivar.</td></tr>
+      <tr><td>Cadastro concluído</td><td>Direciona para o resultado e exibe confirmação de sucesso.</td></tr>
+    </tbody>
+  </table>
+  <figure class="screen"><img src="screenshots/20-formulario-erros.png" alt="Formulário de evento mostrando resumo e mensagens de validação junto aos campos"><figcaption>Exemplo real de tentativa de envio incompleto, sem perda do que foi digitado.</figcaption></figure>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Aluna • Início</div>
+  <h2>Entenda o painel</h2>
+  <p class="lead">O início resume o desempenho financeiro e ajuda a responder rapidamente quanto foi vendido, quanto entrou e quanto ainda está pendente.</p>
+  <table>
+    <thead><tr><th>Indicador</th><th>Significado</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Vendido</strong></td><td>Soma do valor de venda dos eventos no período.</td></tr>
+      <tr><td><strong>Recebido</strong></td><td>Total de entradas financeiras registradas.</td></tr>
+      <tr><td><strong>A receber</strong></td><td>Parte das vendas que ainda não foi registrada como recebida.</td></tr>
+      <tr><td><strong>Resultado</strong></td><td>Valor recebido menos as despesas registradas.</td></tr>
+      <tr><td><strong>Eventos</strong></td><td>Quantidade de eventos cadastrados e realizados.</td></tr>
+      <tr><td><strong>Ticket médio</strong></td><td>Média do valor vendido por evento.</td></tr>
+    </tbody>
+  </table>
+  <div class="box tip"><strong>Gráficos redesenhados:</strong> recebido, despesas e resultado têm cores e traços diferentes, além de valores detalhados ao passar o mouse ou tocar. Quando ainda não há dados, o gráfico explica qual cadastro falta em vez de mostrar uma área vazia.</div>
+  <figure class="screen"><img src="screenshots/07-app-dashboard.png" alt="Painel da aluna com indicadores, gráficos e distribuição"><figcaption>Painel completo com métricas, gráficos e sugestão de distribuição.</figcaption></figure>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Aluna • Clientes</div>
+  <h2>Cadastre e consulte clientes</h2>
+  <p>O cliente deve ser criado antes do evento. Isso evita nomes duplicados e mantém o histórico de vendas agrupado.</p>
+  <ol class="steps">
+    <li>Abra <strong>Clientes</strong> no menu.</li>
+    <li>Preencha o <strong>Nome</strong>, que é obrigatório.</li>
+    <li>Adicione telefone e e-mail quando disponíveis.</li>
+    <li>Selecione <strong>Novo cliente</strong>.</li>
+  </ol>
+  <div class="box tip"><strong>Boa prática:</strong> antes de cadastrar, procure o nome na lista. Use telefone ou e-mail para diferenciar pessoas com nomes iguais.</div>
+  <figure class="screen"><img src="screenshots/10-app-clientes.png" alt="Tela de clientes com formulário e estado vazio"><figcaption>Cadastro rápido no topo; histórico aparece logo abaixo.</figcaption></figure>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Aluna • Eventos</div>
+  <h2>Acompanhe os eventos</h2>
+  <p>A lista mostra cliente/serviço, data, valores vendido e recebido, saldo a receber, resultado previsto e status. Selecione um cartão para abrir os detalhes.</p>
+  <div class="grid-3">
+    <div class="box white"><span class="status amber">Agendado</span><p class="small">Evento futuro ou ainda não concluído.</p></div>
+    <div class="box white"><span class="status green">Realizado</span><p class="small">Trabalho marcado como concluído.</p></div>
+    <div class="box white"><span class="status red">Cancelado</span><p class="small">Evento cancelado, preservado no histórico.</p></div>
+  </div>
+  <figure class="screen"><img src="screenshots/08-app-eventos.png" alt="Lista de eventos e botão Novo evento"><figcaption>Use “Novo evento” para cadastrar a próxima venda.</figcaption></figure>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Aluna • Novo evento</div>
+  <h2>Crie uma venda/evento</h2>
+  <table>
+    <thead><tr><th>Campo</th><th>Como preencher</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Cliente *</strong></td><td>Escolha um cliente já cadastrado.</td></tr>
+      <tr><td><strong>Serviço *</strong></td><td>Selecione o tipo de serviço prestado.</td></tr>
+      <tr><td><strong>Título</strong></td><td>Use um nome fácil de reconhecer, como “Casamento Ana e João”.</td></tr>
+      <tr><td><strong>Data da venda *</strong></td><td>Dia em que o contrato/venda foi fechado.</td></tr>
+      <tr><td><strong>Data do evento</strong></td><td>Dia de realização; pode ficar vazio se ainda não definido.</td></tr>
+      <tr><td><strong>Valor vendido *</strong></td><td>Valor total combinado com o cliente.</td></tr>
+      <tr><td><strong>Recebido agora</strong></td><td>Sinal ou pagamento já recebido na criação.</td></tr>
+      <tr><td><strong>Custo de equipe inicial</strong></td><td>Custo já conhecido, vinculado ao evento.</td></tr>
+      <tr><td><strong>Conta</strong></td><td>Caixa/banco em que o valor entrou ou saiu.</td></tr>
+    </tbody>
+  </table>
+  <figure class="screen"><img src="screenshots/09-app-novo-evento.png" alt="Formulário de novo evento com campos obrigatórios"><figcaption>Se ainda não houver cliente, o sistema oferece um atalho para cadastrá-lo.</figcaption></figure>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Aluna • Detalhe do evento</div>
+  <h2>Conclua ou cancele um evento</h2>
+  <ol class="steps">
+    <li>Abra <strong>Eventos</strong> e selecione o cartão desejado.</li>
+    <li>Confira valor vendido, recebido, a receber, custos e resultado previsto.</li>
+    <li>Use <strong>Marcar como realizado</strong> quando o trabalho for concluído.</li>
+    <li>Use <strong>Cancelar evento</strong> somente quando necessário; o sistema pede confirmação.</li>
+  </ol>
+  <div class="box warning"><strong>Atenção:</strong> cancelar muda o status, mas mantém o evento no histórico. Movimentações financeiras já registradas continuam visíveis e devem ser conferidas.</div>
+  <h3>Como os valores são calculados</h3>
+  <table>
+    <tbody>
+      <tr><th>A receber</th><td>Valor vendido − recebimentos vinculados ao evento.</td></tr>
+      <tr><th>Resultado previsto</th><td>Valor vendido − despesas vinculadas ao evento.</td></tr>
+      <tr><th>Resultado do caixa</th><td>Recebimentos − despesas efetivamente registradas.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Aluna • Financeiro</div>
+  <h2>Registre recebimentos e despesas</h2>
+  <div class="grid-2">
+    <div class="box white">
+      <h3>Recebimento</h3>
+      <ol class="steps">
+        <li>Informe valor e data.</li>
+        <li>Relacione o evento, se houver.</li>
+        <li>Escolha conta e forma de pagamento.</li>
+        <li>Adicione uma descrição clara e salve.</li>
+      </ol>
+    </div>
+    <div class="box white">
+      <h3>Despesa</h3>
+      <ol class="steps">
+        <li>Informe valor e data.</li>
+        <li>Escolha uma categoria.</li>
+        <li>Relacione evento e conta, se aplicável.</li>
+        <li>Descreva o gasto e salve.</li>
+      </ol>
+    </div>
+  </div>
+  <div class="box tip"><strong>Exemplo:</strong> para um sinal de casamento, escolha o evento correspondente, a conta que recebeu o valor e “Pix” como forma de pagamento.</div>
+  <figure class="screen"><img src="screenshots/11-app-financeiro.png" alt="Tela financeira com recebimentos, despesas, movimentações, contas e distribuição"><figcaption>Todas as funções financeiras ficam na mesma tela.</figcaption></figure>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Aluna • Financeiro</div>
+  <h2>Contas e distribuição do resultado</h2>
+  <h3>Contas</h3>
+  <p>Crie uma conta para cada local onde o dinheiro é controlado: caixa físico, banco, conta digital ou outro. O saldo considera o valor inicial e as movimentações vinculadas.</p>
+  <h3>Distribuição</h3>
+  <p>Os percentuais ajudam a separar o resultado disponível. A soma não pode ultrapassar 100%.</p>
+  <table>
+    <thead><tr><th>Exemplo</th><th>Objetivo</th></tr></thead>
+    <tbody>
+      <tr><td>Pró-labore</td><td>Remuneração pessoal da profissional.</td></tr>
+      <tr><td>Reserva de emergência</td><td>Proteção para períodos com menos eventos.</td></tr>
+      <tr><td>Investimento na empresa</td><td>Equipamentos, melhorias e estrutura.</td></tr>
+      <tr><td>Marketing</td><td>Divulgação e aquisição de clientes.</td></tr>
+      <tr><td>Conhecimento</td><td>Cursos, mentoria e desenvolvimento.</td></tr>
+    </tbody>
+  </table>
+  <div class="box warning"><strong>Importante:</strong> a distribuição é uma sugestão sobre o resultado. Ela não movimenta dinheiro automaticamente entre contas bancárias.</div>
+
+  <h3>Configurações e atalhos</h3>
+  <p>A tela mostra o perfil e o espaço de trabalho, oferece atalhos para as áreas principais e permite sair com segurança no celular.</p>
+  <figure class="screen"><img src="screenshots/12-app-configuracoes.png" alt="Tela de configurações com perfil e atalhos"><figcaption>Configurações da conta e acessos rápidos.</figcaption></figure>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Responsividade</div>
+  <h2>Use no celular com segurança</h2>
+  <p class="lead">As telas se reorganizam automaticamente. A barra inferior mantém as cinco áreas principais sempre acessíveis, e o botão de saída aparece no topo.</p>
+  <table>
+    <thead><tr><th>Item</th><th>No celular</th></tr></thead>
+    <tbody>
+      <tr><td>Navegação</td><td>Início, Eventos, Financeiro, Clientes e Mais na barra inferior.</td></tr>
+      <tr><td>Novo evento</td><td>Abra Eventos e selecione o botão destacado.</td></tr>
+      <tr><td>Formulários</td><td>Campos aparecem em uma coluna para facilitar leitura e toque.</td></tr>
+      <tr><td>Administração</td><td>Visão geral, Alunas e Logs ficam na barra inferior administrativa.</td></tr>
+      <tr><td>Sair</td><td>Use o ícone no canto superior direito ou “Sair do sistema” em Mais.</td></tr>
+    </tbody>
+  </table>
+  <div class="mobile-shots">
+    <figure><img src="screenshots/14-mobile-dashboard.png" alt="Painel da aluna no celular"><figcaption>Início</figcaption></figure>
+    <figure><img src="screenshots/15-mobile-eventos.png" alt="Lista de eventos no celular"><figcaption>Eventos</figcaption></figure>
+    <figure><img src="screenshots/21-mobile-onboarding.png" alt="Guia inicial no celular"><figcaption>Guia inicial</figcaption></figure>
   </div>
 </section>
 
-<section class="page-break">
-  <h2>Resumo das Funções</h2>
-  <div class="toc">
-    <ul>
-      <li>Login com validação de erro.</li>
-      <li>Dashboard financeiro da aluna.</li>
-      <li>Cadastro e acompanhamento de eventos.</li>
-      <li>Cadastro de clientes.</li>
-      <li>Registro de recebimentos e despesas.</li>
-      <li>Cadastro de contas/caixas.</li>
-      <li>Distribuição percentual do resultado.</li>
-      <li>Painel administrativo de alunas.</li>
-      <li>Convite de novas alunas.</li>
-      <li>Suspensão, carência, reativação e arquivamento de acesso.</li>
-      <li>Logs administrativos.</li>
-    </ul>
+<section class="page">
+  <div class="section-kicker">Responsividade • Continuação</div>
+  <h2>Rolagem e formulários no celular</h2>
+  <p>Role a tela verticalmente para acessar contas e distribuição. A barra inferior permanece visível, mas o conteúdo tem espaço reservado para que os últimos controles possam ser alcançados.</p>
+  <div class="grid-2">
+    <figure class="screen"><img src="screenshots/17-mobile-financeiro-contas.png" alt="Seção de contas do financeiro no celular"><figcaption>Contas e saldo no celular.</figcaption></figure>
+    <figure class="screen"><img src="screenshots/18-mobile-admin.png" alt="Painel administrativo no celular"><figcaption>Administração com navegação inferior.</figcaption></figure>
   </div>
+  <div class="box tip"><strong>Dica:</strong> em telas pequenas, confira se o botão da área atual está destacado em rosa antes de preencher um formulário.</div>
 </section>
 
-<section class="page-break">
-  <h2>Passo a Passo</h2>
-  <div class="box">
-    <h3>Fluxo principal da aluna</h3>
-    <ul>
-      <li>Entrar com e-mail e senha.</li>
-      <li>Cadastrar clientes quando necessário.</li>
-      <li>Criar um novo evento com valor de venda e datas.</li>
-      <li>Registrar recebimentos e despesas no financeiro.</li>
-      <li>Acompanhar resultado, gráficos e distribuição na tela inicial.</li>
-    </ul>
-  </div>
-  <div class="box">
-    <h3>Fluxo administrativo</h3>
-    <ul>
-      <li>Acessar com conta admin.</li>
-      <li>Conferir total de alunas e status no painel.</li>
-      <li>Adicionar nova aluna pelo formulário de convite.</li>
-      <li>Entrar no detalhe da aluna para alterar status de acesso.</li>
-      <li>Consultar logs para acompanhar ações administrativas.</li>
-    </ul>
-  </div>
+<section class="page">
+  <div class="section-kicker">Administração</div>
+  <h2>Visão geral das alunas</h2>
+  <p>O painel administrativo resume total de alunas, acessos ativos, carência, suspensões, novas contas no mês e últimos acessos.</p>
+  <figure class="screen"><img src="screenshots/03-admin-dashboard.png" alt="Painel administrativo com indicadores de alunas"><figcaption>Visão geral para acompanhamento de acesso.</figcaption></figure>
+  <div class="box tip"><strong>Atalho:</strong> “Adicionar aluna” está disponível no painel e também na lista de alunas.</div>
 </section>
 
-
-<section class="screen page-break">
-  <h2>Acesso ao sistema</h2>
-  <p>Entre pelo endereço https://eventos-omega-five.vercel.app/ usando e-mail e senha. Se os dados estiverem incorretos, o sistema mostra a mensagem de erro e mantém a pessoa na tela de login.</p>
-  <img src="screenshots/01-login.png" alt="Acesso ao sistema">
+<section class="page">
+  <div class="section-kicker">Administração</div>
+  <h2>Consulte e convide alunas</h2>
+  <h3>Lista de alunas</h3>
+  <p>Cada cartão mostra nome, identificador, status, data de criação e último acesso. Selecione o cartão para gerenciar o status.</p>
+  <figure class="screen"><img src="screenshots/04-admin-alunas.png" alt="Lista administrativa de alunas"><figcaption>Lista com status e datas principais.</figcaption></figure>
+  <h3>Novo convite</h3>
+  <ol class="steps">
+    <li>Selecione <strong>Adicionar aluna</strong>.</li>
+    <li>Informe nome completo e e-mail.</li>
+    <li>Selecione <strong>Enviar convite</strong>.</li>
+    <li>A aluna usa o e-mail recebido para criar a senha.</li>
+  </ol>
+  <figure class="screen"><img src="screenshots/05-admin-nova-aluna.png" alt="Formulário administrativo para convidar aluna"><figcaption>O envio cria o espaço de trabalho e dispara o convite.</figcaption></figure>
 </section>
 
-<section class="screen page-break">
-  <h2>Mensagem de erro no login</h2>
-  <p>Quando e-mail ou senha estiverem incorretos, aparece o aviso: “E-mail ou senha incorretos. Confira os dados e tente novamente.”</p>
-  <img src="screenshots/02-login-erro.png" alt="Mensagem de erro no login">
+<section class="page">
+  <div class="section-kicker">Administração</div>
+  <h2>Gerencie o status de acesso</h2>
+  <table>
+    <thead><tr><th>Status</th><th>Efeito</th><th>Quando usar</th></tr></thead>
+    <tbody>
+      <tr><td><span class="status green">Ativa</span></td><td>Acesso normal.</td><td>Conta regular.</td></tr>
+      <tr><td><span class="status amber">Carência</span></td><td>Acesso mantido com sinalização.</td><td>Acompanhamento temporário.</td></tr>
+      <tr><td><span class="status red">Suspensa</span></td><td>Bloqueia temporariamente o acesso.</td><td>Regularização ou segurança.</td></tr>
+      <tr><td><span class="status red">Arquivada</span></td><td>Encerra o acesso e preserva histórico.</td><td>Saída definitiva da operação.</td></tr>
+    </tbody>
+  </table>
+  <p>O sistema pede confirmação antes de suspender ou arquivar. O botão do status atual fica desabilitado.</p>
+  <figure class="screen"><img src="screenshots/06-admin-detalhe-aluna.png" alt="Detalhe administrativo da aluna com ações de status"><figcaption>Gerenciamento de acesso com explicações e ações protegidas.</figcaption></figure>
 </section>
 
-<section class="screen page-break">
-  <h2>Início da aluna</h2>
-  <p>Mostra a visão geral do financeiro: vendido, recebido, a receber, resultado, quantidade de eventos, ticket médio, gráficos mensais e sugestão de distribuição do resultado.</p>
-  <img src="screenshots/07-app-dashboard.png" alt="Início da aluna">
+<section class="page">
+  <div class="section-kicker">Administração</div>
+  <h2>Consulte os logs</h2>
+  <p>Convites e mudanças de status ficam registrados para auditoria. A lista exibe uma descrição legível e a data/hora da ação.</p>
+  <figure class="screen"><img src="screenshots/06b-admin-logs.png" alt="Tela de logs administrativos"><figcaption>Quando ainda não existem ações, a tela explica quais registros aparecerão.</figcaption></figure>
+  <div class="box warning"><strong>Uso recomendado:</strong> consulte os logs quando houver dúvida sobre convite, suspensão, reativação ou arquivamento.</div>
 </section>
 
-<section class="screen page-break">
-  <h2>Eventos</h2>
-  <p>Lista os eventos cadastrados. Use esta tela para acompanhar vendas, status e histórico dos eventos.</p>
-  <img src="screenshots/08-app-eventos.png" alt="Eventos">
+<section class="page">
+  <div class="section-kicker">Referência rápida</div>
+  <h2>Dúvidas frequentes</h2>
+  <div class="box white"><h3>Por que o painel está zerado?</h3><p>Cadastre um evento e registre recebimentos/despesas. O painel depende dessas informações.</p></div>
+  <div class="box white"><h3>Por que não consigo criar um evento?</h3><p>Confirme se existe um cliente cadastrado e se todos os campos com * foram preenchidos.</p></div>
+  <div class="box white"><h3>O saldo da conta não mudou.</h3><p>Ao registrar a movimentação, selecione a conta correta. Lançamentos sem conta continuam no histórico geral, mas não compõem aquele saldo.</p></div>
+  <div class="box white"><h3>O valor “A receber” parece incorreto.</h3><p>Confira se todos os recebimentos foram vinculados ao evento correspondente e se o valor de venda está correto.</p></div>
+  <div class="box white"><h3>A aluna não consegue entrar.</h3><p>Confira o status no admin. Contas suspensas ou arquivadas são direcionadas para a tela de acesso suspenso.</p></div>
+  <div class="box white"><h3>Os percentuais não salvam.</h3><p>Revise os números: cada percentual deve ficar entre 0 e 100, e a soma não pode ultrapassar 100%.</p></div>
 </section>
 
-<section class="screen page-break">
-  <h2>Novo evento</h2>
-  <p>Cadastro de uma venda/evento. Informe cliente, serviço, data da venda, data do evento, valor e dados financeiros iniciais para o sistema calcular recebimentos e custos.</p>
-  <img src="screenshots/09-app-novo-evento.png" alt="Novo evento">
-</section>
-
-<section class="screen page-break">
-  <h2>Clientes</h2>
-  <p>Cadastro e consulta de clientes. Os clientes são usados na criação dos eventos para manter o histórico organizado.</p>
-  <img src="screenshots/10-app-clientes.png" alt="Clientes">
-</section>
-
-<section class="screen page-break">
-  <h2>Financeiro</h2>
-  <p>Registre recebimentos e despesas, consulte movimentações, cadastre contas/caixas e ajuste os percentuais de distribuição do resultado.</p>
-  <img src="screenshots/11-app-financeiro.png" alt="Financeiro">
-</section>
-
-<section class="screen page-break">
-  <h2>Configurações</h2>
-  <p>Área de ajustes da conta/workspace. No MVP, concentra informações básicas e preferências disponíveis para a aluna.</p>
-  <img src="screenshots/12-app-configuracoes.png" alt="Configurações">
-</section>
-
-<section class="screen page-break">
-  <h2>Admin: visão geral</h2>
-  <p>Painel administrativo com total de alunas, ativas, em carência, suspensas, novas no mês e últimos acessos.</p>
-  <img src="screenshots/03-admin-dashboard.png" alt="Admin: visão geral">
-</section>
-
-<section class="screen page-break">
-  <h2>Admin: alunas</h2>
-  <p>Lista de alunas com status, data de criação e último acesso. Clique em uma aluna para gerenciar o acesso.</p>
-  <img src="screenshots/04-admin-alunas.png" alt="Admin: alunas">
-</section>
-
-<section class="screen page-break">
-  <h2>Admin: adicionar aluna</h2>
-  <p>Cria convite para uma nova aluna. O sistema cria o workspace, perfil e estrutura financeira inicial.</p>
-  <img src="screenshots/05-admin-nova-aluna.png" alt="Admin: adicionar aluna">
-</section>
-
-<section class="screen page-break">
-  <h2>Admin: detalhe da aluna</h2>
-  <p>Permite alterar status de acesso: reativar, colocar em carência, suspender ou arquivar.</p>
-  <img src="screenshots/06-admin-detalhe-aluna.png" alt="Admin: detalhe da aluna">
-</section>
-
-<section class="screen page-break">
-  <h2>Admin: logs</h2>
-  <p>Registra ações administrativas importantes para auditoria.</p>
-  <img src="screenshots/06b-admin-logs.png" alt="Admin: logs">
-</section>
-
-<section class="page-break">
-  <h2>Boas Práticas de Uso</h2>
-  <ul>
-    <li>Não compartilhar senha entre pessoas.</li>
-    <li>Registrar recebimentos e despesas assim que acontecerem para manter o painel atualizado.</li>
-    <li>Usar a tela de clientes para evitar duplicidade de nomes.</li>
-    <li>Manter os percentuais de distribuição revisados conforme a estratégia financeira.</li>
-    <li>Em caso de acesso indevido ou inadimplência, usar o status da aluna no painel admin.</li>
+<section class="page">
+  <div class="section-kicker">Fechamento</div>
+  <h2>Boas práticas e checklist</h2>
+  <ul class="checklist">
+    <li>Não compartilhar senhas.</li>
+    <li>Sair ao usar aparelho compartilhado.</li>
+    <li>Evitar clientes duplicados.</li>
+    <li>Registrar entradas no dia em que ocorrerem.</li>
+    <li>Registrar despesas com categoria.</li>
+    <li>Vincular movimentações aos eventos.</li>
+    <li>Selecionar a conta financeira correta.</li>
+    <li>Usar descrições fáceis de reconhecer.</li>
+    <li>Revisar valores antes de salvar.</li>
+    <li>Concluir eventos realizados.</li>
+    <li>Confirmar antes de cancelar ou arquivar.</li>
+    <li>Revisar a distribuição periodicamente.</li>
   </ul>
-  <p class="small">Manual gerado com screenshots do ambiente publicado em produção.</p>
+  <div class="box success">
+    <h3>Fluxos revisados nesta versão</h3>
+    <p>Login, erro de login, recuperação e definição de senha; onboarding; validação junto aos campos; estados de envio; falhas de gravação; confirmações; navegação desktop/mobile; painel e gráficos; clientes; criação, listagem e status de eventos; recebimentos; despesas; contas; distribuição; perfil; convite de aluna; status de acesso; suspensão; logs e saída.</p>
+  </div>
+  <div class="box tip">
+    <h3>Ambientes verificados</h3>
+    <p>Layout validado em 375 px (celular), 768 px (tablet), 1024 px e 1440 px (desktop), sem rolagem horizontal nas rotas principais.</p>
+  </div>
+  <p class="small">Manual atualizado a partir das telas reais do sistema em ambiente de homologação. As imagens podem mostrar estados vazios quando a conta de teste ainda não possui lançamentos.</p>
 </section>
+
 </body>
 </html>

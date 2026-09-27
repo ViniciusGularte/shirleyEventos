@@ -5,7 +5,7 @@
 :root {
   --event-ink: #120c12;
   --event-paper: #fff8fb;
-  --event-rose: #f45b92;
+  --event-rose: #be185d;
 }
 
 * {
@@ -19,6 +19,7 @@ body {
 }
 
 body {
+  margin: 0;
   background: var(--event-paper);
   color: var(--event-ink);
 }
@@ -41,5 +42,21 @@ textarea {
 }
 
 .focus-ring:focus-visible {
-  box-shadow: 0 0 0 3px rgba(244, 91, 146, 0.22);
+  outline: 3px solid rgba(190, 24, 93, 0.32);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: rgba(190, 24, 93, 0.18);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

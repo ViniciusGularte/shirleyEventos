@@ -1,19 +1,23 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 import { requireAdmin } from "@/lib/auth/guards";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { errorState, validationState, type ActionState } from "@/lib/actions/state";
 
 const inviteSchema = z.object({
-  fullName: z.string().min(2),
-  email: z.string().email().transform((email) => email.trim().toLowerCase())
+  fullName: z.string().trim().min(2, "Informe o nome completo da aluna."),
+  email: z.string().email("Informe um e-mail válido.").transform((email) => email.trim().toLowerCase())
 });
 
-export async function inviteStudent(formData: FormData) {
+export async function inviteStudent(_state: ActionState, formData: FormData): Promise<ActionState> {
   const { user } = await requireAdmin();
   const admin = createAdminClient();
-  const input = inviteSchema.parse({ fullName: formData.get("fullName"), email: formData.get("email") });
+  const parsed = inviteSchema.safeParse({ fullName: formData.get("fullName"), email: formData.get("email") });
+  if (!parsed.success) return validationState(parsed.error);
+  const input = parsed.data;
   let workspaceId: string | null = null;
   let inviteId: string | null = null;
 
@@ -22,7 +26,7 @@ export async function inviteStudent(formData: FormData) {
     .insert({ name: input.fullName })
     .select("id")
     .single();
-  if (workspaceError) throw new Error("Não foi possível criar workspace.");
+  if (workspaceError) return errorState("Não foi possível criar o espaço da aluna. Tente novamente.");
   workspaceId = workspace.id;
 
   const { data: invite, error: inviteError } = await admin
@@ -36,7 +40,10 @@ export async function inviteStudent(formData: FormData) {
     })
     .select("id")
     .single();
-  if (inviteError) throw new Error("Não foi possível criar convite.");
+  if (inviteError) {
+    await admin.from("event_fin_workspaces").update({ status: "archived", archived_at: new Date().toISOString() }).eq("id", workspaceId);
+    return errorState("Este e-mail já pode ter sido convidado. Confira a lista de alunas antes de tentar novamente.");
+  }
   inviteId = invite.id;
 
   const { data: authUser, error: authError } = await admin.auth.admin.inviteUserByEmail(input.email, {
@@ -50,13 +57,19 @@ export async function inviteStudent(formData: FormData) {
   if (authError || !authUser.user) {
     await admin.from("event_fin_invites").update({ status: "cancelled" }).eq("id", inviteId);
     await admin.from("event_fin_workspaces").update({ status: "archived", archived_at: new Date().toISOString() }).eq("id", workspaceId);
-    throw new Error("Não foi possível enviar convite.");
+    return errorState("Não foi possível enviar o convite. Confira o e-mail e tente novamente.");
   }
 
-  await admin.from("event_fin_profiles").insert({ id: authUser.user.id, full_name: input.fullName, system_role: "student" });
-  await admin.from("event_fin_workspace_members").insert({ workspace_id: workspace.id, user_id: authUser.user.id });
+  const { error: profileError } = await admin.from("event_fin_profiles").insert({ id: authUser.user.id, full_name: input.fullName, system_role: "student" });
+  const { error: memberError } = profileError ? { error: profileError } : await admin.from("event_fin_workspace_members").insert({ workspace_id: workspace.id, user_id: authUser.user.id });
+  const { error: seedError } = memberError ? { error: memberError } : await admin.rpc("event_fin_seed_workspace", { p_workspace_id: workspace.id });
+  if (profileError || memberError || seedError) {
+    await admin.auth.admin.deleteUser(authUser.user.id);
+    await admin.from("event_fin_invites").update({ status: "cancelled" }).eq("id", inviteId);
+    await admin.from("event_fin_workspaces").update({ status: "archived", archived_at: new Date().toISOString() }).eq("id", workspaceId);
+    return errorState("O convite não pôde ser concluído e foi desfeito. Tente novamente.");
+  }
   await admin.from("event_fin_invites").update({ auth_user_id: authUser.user.id }).eq("id", invite.id);
-  await admin.rpc("event_fin_seed_workspace", { p_workspace_id: workspace.id });
   await admin.from("event_fin_admin_audit_logs").insert({
     admin_user_id: user.id,
     target_user_id: authUser.user.id,
@@ -66,18 +79,19 @@ export async function inviteStudent(formData: FormData) {
   });
 
   revalidatePath("/admin/alunas");
+  redirect("/admin/alunas?convite=1");
 }
 
-export async function updateStudentStatus(userId: string, status: "active" | "grace" | "suspended" | "archived") {
+export async function updateStudentStatus(userId: string, status: "active" | "grace" | "suspended" | "archived", _state: ActionState, _formData: FormData): Promise<ActionState> {
   const { user } = await requireAdmin();
   const admin = createAdminClient();
   const { data: member, error: memberError } = await admin.from("event_fin_workspace_members").select("workspace_id").eq("user_id", userId).single();
-  if (memberError) throw new Error("Aluna não encontrada.");
+  if (memberError) return errorState("Aluna não encontrada. Volte à lista e tente novamente.");
   const { error } = await admin
     .from("event_fin_workspaces")
     .update({ status, archived_at: status === "archived" ? new Date().toISOString() : null })
     .eq("id", member.workspace_id);
-  if (error) throw new Error("Não foi possível atualizar acesso.");
+  if (error) return errorState("Não foi possível atualizar o acesso. Tente novamente.");
   await admin.from("event_fin_admin_audit_logs").insert({
     admin_user_id: user.id,
     target_user_id: userId,
@@ -86,4 +100,6 @@ export async function updateStudentStatus(userId: string, status: "active" | "gr
     metadata: {}
   });
   revalidatePath("/admin/alunas");
+  revalidatePath(`/admin/alunas/${userId}`);
+  redirect(`/admin/alunas/${userId}?status=${status}`);
 }

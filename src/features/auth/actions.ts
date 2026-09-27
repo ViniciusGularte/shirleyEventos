@@ -22,5 +22,17 @@ export async function updatePassword(formData: FormData) {
   if (password.length < 8 || password !== confirmation) redirect("/definir-senha?erro=1");
   const { error } = await supabase.auth.updateUser({ password });
   if (error) redirect("/definir-senha?erro=1");
-  redirect("/app");
+  redirect("/app/boas-vindas?senha=1");
+}
+
+export async function requestPasswordReset(formData: FormData) {
+  const supabase = await createClient();
+  const email = String(formData.get("email") ?? "").trim().toLowerCase();
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL;
+  if (!appUrl) redirect("/esqueci-senha?erro=1");
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${appUrl}/auth/callback`
+  });
+  if (error) redirect("/esqueci-senha?erro=1");
+  redirect("/esqueci-senha?enviado=1");
 }

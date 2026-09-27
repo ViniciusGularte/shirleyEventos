@@ -8,3 +8,5 @@ out
 coverage
 .scaffold_tmp_path
 tsconfig.tsbuildinfo
+playwright-report
+test-results
