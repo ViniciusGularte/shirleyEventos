@@ -11,6 +11,7 @@ import { listEvents } from "@/features/events/queries";
 import { FlashMessage } from "@/components/ui/flash-message";
 import { ActionForm, FieldError } from "@/components/ui/action-form";
 import { DatePickerField } from "@/components/ui/date-picker-field";
+import { CurrencyField } from "@/components/ui/currency-field";
 
 export default async function FinancePage({ searchParams }: { searchParams: Promise<{ salvo?: string }> }) {
   const params = await searchParams;
@@ -32,7 +33,7 @@ export default async function FinancePage({ searchParams }: { searchParams: Prom
           <h2 className="text-lg font-extrabold">Recebimento</h2>
           <p className="mt-1 text-sm text-event-ink/60">Registre uma entrada e, se quiser, relacione-a a um evento e uma conta.</p>
           <ActionForm action={createIncome} className="mt-4 grid gap-3">
-            <Field label="Valor" name="amount" inputMode="decimal" placeholder="0,00" required />
+            <CurrencyField label="Valor" name="amount" required />
             <DatePickerField label="Data" name="occurred_at" required />
             <SelectField label="Evento" name="event_id"><option value="">Sem evento</option>{events.map((event: any) => <option key={event.id} value={event.id}>{event.title || event.event_fin_clients?.name || event.service_name_snapshot}</option>)}</SelectField>
             <SelectField label="Conta" name="wallet_id"><option value="">Sem conta</option>{wallets.map((wallet: any) => <option key={wallet.id} value={wallet.id}>{wallet.name}</option>)}</SelectField>
@@ -45,7 +46,7 @@ export default async function FinancePage({ searchParams }: { searchParams: Prom
           <h2 className="text-lg font-extrabold">Despesa</h2>
           <p className="mt-1 text-sm text-event-ink/60">Classifique o custo para manter o resultado e o histórico organizados.</p>
           <ActionForm action={createExpense} className="mt-4 grid gap-3">
-            <Field label="Valor" name="amount" inputMode="decimal" placeholder="0,00" required />
+            <CurrencyField label="Valor" name="amount" required />
             <DatePickerField label="Data" name="occurred_at" required />
             <SelectField label="Categoria" name="category_id" required>
                 <option value="">Selecione</option>
@@ -73,7 +74,7 @@ export default async function FinancePage({ searchParams }: { searchParams: Prom
           <ActionForm action={createWallet} className="mt-4 grid gap-3 sm:grid-cols-2">
             <Field label="Nome" name="name" required />
             <SelectField label="Tipo" name="type"><option value="cash">Caixa</option><option value="bank">Banco</option><option value="digital">Digital</option><option value="other">Outro</option></SelectField>
-            <Field label="Saldo inicial" name="opening_balance" inputMode="decimal" placeholder="0,00" />
+            <CurrencyField label="Saldo inicial" name="opening_balance" allowNegative />
             <div className="self-end"><SubmitButton>Criar conta</SubmitButton></div>
           </ActionForm>
           <div className="mt-4 grid gap-2">

@@ -73,7 +73,22 @@ test("todos os formulários operacionais inserem dados", async ({ page }) => {
     await page.locator(".rdp-today button").click();
     await page.getByLabel("Horário", { exact: true }).selectOption("18:00");
     await page.getByRole("button", { name: "Aplicar" }).click();
-    await page.getByLabel("Valor vendido").fill("3500,00");
+    const saleAmount = page.getByLabel("Valor vendido");
+    await expect(saleAmount).toHaveValue(/0,00$/);
+    await saleAmount.pressSequentially("1");
+    await expect(saleAmount).toHaveValue(/0,01$/);
+    await saleAmount.pressSequentially("0");
+    await expect(saleAmount).toHaveValue(/0,10$/);
+    await saleAmount.pressSequentially("0");
+    await expect(saleAmount).toHaveValue(/1,00$/);
+    await saleAmount.fill("");
+    await saleAmount.pressSequentially("1100");
+    await expect(saleAmount).toHaveValue(/11,00$/);
+    await saleAmount.press("Backspace");
+    await saleAmount.press("1");
+    await expect(saleAmount).toHaveValue(/11,01$/);
+    await saleAmount.fill("3500,00");
+    await expect(saleAmount).toHaveValue(/3\.500,00$/);
     await page.getByLabel("Recebido agora").fill("1000,00");
     await page.getByLabel("Custo de equipe inicial").fill("400,00");
     await page.getByLabel("Conta").selectOption({ index: 1 });
@@ -108,6 +123,20 @@ test("todos os formulários operacionais inserem dados", async ({ page }) => {
     await allocationCard.getByRole("button", { name: "Salvar percentuais" }).click();
     await expect(page).toHaveURL(/salvo=distribuicao/);
     await expect(page.getByText("Percentuais de distribuição atualizados.")).toBeVisible();
+
+    const [{ data: savedEvent }, { data: savedTransactions }, { data: savedWallet }] = await Promise.all([
+      admin.from("event_fin_events").select("sale_amount").eq("workspace_id", workspaceId!).single(),
+      admin.from("event_fin_transactions").select("type,amount").eq("workspace_id", workspaceId!),
+      admin.from("event_fin_wallets").select("opening_balance").eq("workspace_id", workspaceId!).eq("name", `Conta E2E ${suffix}`).single()
+    ]);
+    expect(Number(savedEvent?.sale_amount)).toBe(3500);
+    expect(savedTransactions?.map((item) => [item.type, Number(item.amount)])).toEqual(expect.arrayContaining([
+      ["income", 1000],
+      ["expense", 400],
+      ["income", 250],
+      ["expense", 100]
+    ]));
+    expect(Number(savedWallet?.opening_balance)).toBe(50);
   } finally {
     if (workspaceId) await admin.from("event_fin_workspaces").delete().eq("id", workspaceId);
     if (userId) await admin.auth.admin.deleteUser(userId);

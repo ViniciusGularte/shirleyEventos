@@ -9,6 +9,7 @@ import {
   calculateEventReceived,
   calculateWalletBalance
 } from "@/lib/finance/calculations";
+import { appendCurrencyDigit, currencyInputToCents, formatCurrencyFromCents, parseMoney, removeCurrencyDigit } from "@/lib/finance/currency";
 
 const transactions = [
   { type: "income" as const, amount: 1000, event_id: "event-1", wallet_id: "wallet-1" },
@@ -18,6 +19,22 @@ const transactions = [
 ];
 
 describe("finance calculations", () => {
+  it("formata e interpreta valores BRL sem alterar os centavos", () => {
+    expect(formatCurrencyFromCents(0)).toMatch(/R\$\s?0,00/);
+    expect(formatCurrencyFromCents(1)).toMatch(/R\$\s?0,01/);
+    expect(formatCurrencyFromCents(10)).toMatch(/R\$\s?0,10/);
+    expect(formatCurrencyFromCents(100)).toMatch(/R\$\s?1,00/);
+    expect(formatCurrencyFromCents(1101)).toMatch(/R\$\s?11,01/);
+    expect(currencyInputToCents("R$ 0,001")).toBe(1);
+    expect(currencyInputToCents("R$ 0,010")).toBe(10);
+    expect(currencyInputToCents("R$ 1,100")).toBe(1100);
+    expect(currencyInputToCents("-R$ 12,34", true)).toBe(-1234);
+    expect([1, 1, 0, 1].reduce(appendCurrencyDigit, 0)).toBe(1101);
+    expect(removeCurrencyDigit(1101)).toBe(110);
+    expect(parseMoney("R$ 1.234,56")).toBe(1234.56);
+    expect(parseMoney("-R$ 12,34")).toBe(-12.34);
+  });
+
   it("calcula recebido, custos, a receber e resultado previsto do evento", () => {
     expect(calculateEventReceived("event-1", transactions)).toBe(1500);
     expect(calculateEventExpenses("event-1", transactions)).toBe(250);

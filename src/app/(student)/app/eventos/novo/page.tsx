@@ -8,6 +8,7 @@ import Link from "next/link";
 import { ArrowLeft, Users } from "lucide-react";
 import { ActionForm } from "@/components/ui/action-form";
 import { DatePickerField } from "@/components/ui/date-picker-field";
+import { CurrencyField } from "@/components/ui/currency-field";
 
 export default async function NewEventPage() {
   const { supabase, workspaceId } = await requireStudentWorkspace();
@@ -43,9 +44,9 @@ export default async function NewEventPage() {
           <Field label="Título" name="title" />
           <DatePickerField label="Data da venda" name="sale_date" required />
           <DatePickerField label="Data e horário do evento" name="event_date" timeName="event_time" />
-          <Field label="Valor vendido" name="sale_amount" inputMode="decimal" placeholder="0,00" required />
-          <Field label="Recebido agora" name="received_now" inputMode="decimal" placeholder="0,00" />
-          <Field label="Custo de equipe inicial" name="initial_cost" inputMode="decimal" placeholder="0,00" />
+          <CurrencyField label="Valor vendido" name="sale_amount" required />
+          <CurrencyField label="Recebido agora" name="received_now" />
+          <CurrencyField label="Custo de equipe inicial" name="initial_cost" />
           <SelectField label="Conta" name="wallet_id">
               <option value="">Sem conta</option>
               {wallets?.map((wallet) => <option key={wallet.id} value={wallet.id}>{wallet.name}</option>)}
