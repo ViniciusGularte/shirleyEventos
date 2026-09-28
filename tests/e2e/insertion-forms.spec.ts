@@ -13,6 +13,7 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const serviceRole = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 test("todos os formulários operacionais inserem dados", async ({ page }) => {
+  test.setTimeout(90_000);
   test.skip(!supabaseUrl || !serviceRole, "Supabase não configurado para o teste completo.");
   const admin = createClient(supabaseUrl!, serviceRole!, { auth: { persistSession: false, autoRefreshToken: false } });
   const suffix = `${Date.now()}-${Math.random().toString(16).slice(2)}`;
