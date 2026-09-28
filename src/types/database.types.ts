@@ -52,7 +52,7 @@ export type Database = {
         Update: Partial<Database["public"]["Tables"]["event_fin_services"]["Row"]>;
       };
       event_fin_events: {
-        Row: { id: string; workspace_id: string; client_id: string; service_id: string | null; title: string | null; service_name_snapshot: string; sale_date: string; event_date: string | null; sale_amount: number; status: "scheduled" | "completed" | "cancelled"; notes: string | null; created_at: string; updated_at: string; cancelled_at: string | null };
+        Row: { id: string; workspace_id: string; client_id: string; service_id: string | null; title: string | null; service_name_snapshot: string; sale_date: string; event_date: string | null; event_time: string | null; sale_amount: number; status: "scheduled" | "completed" | "cancelled"; notes: string | null; created_at: string; updated_at: string; cancelled_at: string | null };
         Insert: Partial<Database["public"]["Tables"]["event_fin_events"]["Row"]> & { workspace_id: string; client_id: string; service_name_snapshot: string; sale_date: string; sale_amount: number };
         Update: Partial<Database["public"]["Tables"]["event_fin_events"]["Row"]>;
       };

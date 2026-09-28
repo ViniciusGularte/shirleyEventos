@@ -27,7 +27,7 @@ export default async function EventDetailPage({ params, searchParams }: { params
     <div className="grid gap-6">
       <PageHeader
         title={event.title || event.event_fin_clients?.name}
-        subtitle={`${event.service_name_snapshot} • ${event.event_date ? new Date(`${event.event_date}T00:00:00`).toLocaleDateString("pt-BR", { dateStyle: "long" }) : "Sem data"}`}
+        subtitle={`${event.service_name_snapshot} • ${formatEventSchedule(event.event_date, event.event_time, event.notes)}`}
         action={<Link className="focus-ring inline-flex min-h-12 items-center justify-center gap-2 rounded-[18px] border border-event-ink/10 px-4 text-sm font-bold hover:border-event-rose/40" href="/app/eventos"><ArrowLeft size={18} /> Voltar aos eventos</Link>}
       />
       {query.criado === "1" ? <FlashMessage>Evento criado com sucesso.</FlashMessage> : null}
@@ -58,6 +58,13 @@ export default async function EventDetailPage({ params, searchParams }: { params
       <Card><h2 className="font-extrabold">Cliente</h2><p className="mt-2 text-sm text-event-ink/65">{event.event_fin_clients?.name}</p></Card>
     </div>
   );
+}
+
+function formatEventSchedule(date?: string | null, time?: string | null, notes?: string | null) {
+  if (!date) return "Sem data";
+  const formattedDate = new Date(`${date}T00:00:00`).toLocaleDateString("pt-BR", { dateStyle: "long" });
+  const storedTime = time?.slice(0, 5) ?? notes?.match(/(?:^|\n)Horário do evento: ([0-2]\d:[0-5]\d)/)?.[1];
+  return storedTime ? `${formattedDate} às ${storedTime}` : formattedDate;
 }
 
 function Rows({ rows }: { rows: any[] }) {

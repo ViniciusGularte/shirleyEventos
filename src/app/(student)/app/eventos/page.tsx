@@ -30,7 +30,7 @@ export default async function EventsPage() {
                   <div>
                     <h2 className="font-extrabold">{event.title || event.event_fin_clients?.name}</h2>
                     <p className="text-sm text-event-ink/58">{event.service_name_snapshot}</p>
-                    <p className="mt-2 text-sm text-event-ink/58">{event.event_date ? new Date(`${event.event_date}T00:00:00`).toLocaleDateString("pt-BR") : "Sem data"}</p>
+                    <p className="mt-2 text-sm text-event-ink/58">{formatEventSchedule(event.event_date, event.event_time, event.notes)}</p>
                   </div>
                   <Amount label="Vendido" value={event.sale_amount} />
                   <Amount label="Recebido" value={fin?.received_amount ?? 0} />
@@ -45,6 +45,13 @@ export default async function EventsPage() {
       )}
     </div>
   );
+}
+
+function formatEventSchedule(date?: string | null, time?: string | null, notes?: string | null) {
+  if (!date) return "Sem data";
+  const formattedDate = new Date(`${date}T00:00:00`).toLocaleDateString("pt-BR");
+  const storedTime = time?.slice(0, 5) ?? notes?.match(/(?:^|\n)Horário do evento: ([0-2]\d:[0-5]\d)/)?.[1];
+  return storedTime ? `${formattedDate} às ${storedTime}` : formattedDate;
 }
 
 function Amount({ label, value }: { label: string; value: number }) {

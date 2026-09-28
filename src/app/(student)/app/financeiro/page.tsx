@@ -4,12 +4,13 @@ import { listTransactions, listWallets, getAllocationRules } from "@/features/fi
 import { PageHeader } from "@/components/layout/page-header";
 import { Card } from "@/components/ui/card";
 import { EmptyState } from "@/components/ui/empty-state";
-import { Field, SubmitButton } from "@/components/ui/simple-form";
+import { Field, SelectField, SubmitButton } from "@/components/ui/simple-form";
 import { formatCurrency } from "@/lib/finance/currency";
 import { calculateWalletBalance } from "@/lib/finance/calculations";
 import { listEvents } from "@/features/events/queries";
 import { FlashMessage } from "@/components/ui/flash-message";
 import { ActionForm, FieldError } from "@/components/ui/action-form";
+import { DatePickerField } from "@/components/ui/date-picker-field";
 
 export default async function FinancePage({ searchParams }: { searchParams: Promise<{ salvo?: string }> }) {
   const params = await searchParams;
@@ -32,16 +33,10 @@ export default async function FinancePage({ searchParams }: { searchParams: Prom
           <p className="mt-1 text-sm text-event-ink/60">Registre uma entrada e, se quiser, relacione-a a um evento e uma conta.</p>
           <ActionForm action={createIncome} className="mt-4 grid gap-3">
             <Field label="Valor" name="amount" inputMode="decimal" placeholder="0,00" required />
-            <Field label="Data" name="occurred_at" type="date" required />
-            <Field label="Evento" name="event_id">
-              <select className={selectClass} name="event_id"><option value="">Sem evento</option>{events.map((event: any) => <option key={event.id} value={event.id}>{event.title || event.event_fin_clients?.name || event.service_name_snapshot}</option>)}</select>
-            </Field>
-            <Field label="Conta" name="wallet_id">
-              <select className={selectClass} name="wallet_id"><option value="">Sem conta</option>{wallets.map((wallet: any) => <option key={wallet.id} value={wallet.id}>{wallet.name}</option>)}</select>
-            </Field>
-            <Field label="Forma de pagamento" name="payment_method">
-              <select className={selectClass} name="payment_method" defaultValue="pix"><option value="pix">Pix</option><option value="cash">Dinheiro</option><option value="credit_card">Cartão de crédito</option><option value="debit_card">Cartão de débito</option><option value="bank_transfer">Transferência</option><option value="other">Outro</option></select>
-            </Field>
+            <DatePickerField label="Data" name="occurred_at" required />
+            <SelectField label="Evento" name="event_id"><option value="">Sem evento</option>{events.map((event: any) => <option key={event.id} value={event.id}>{event.title || event.event_fin_clients?.name || event.service_name_snapshot}</option>)}</SelectField>
+            <SelectField label="Conta" name="wallet_id"><option value="">Sem conta</option>{wallets.map((wallet: any) => <option key={wallet.id} value={wallet.id}>{wallet.name}</option>)}</SelectField>
+            <SelectField label="Forma de pagamento" name="payment_method" defaultValue="pix"><option value="pix">Pix</option><option value="cash">Dinheiro</option><option value="credit_card">Cartão de crédito</option><option value="debit_card">Cartão de débito</option><option value="bank_transfer">Transferência</option><option value="other">Outro</option></SelectField>
             <Field label="Descrição" name="description" />
             <SubmitButton>Adicionar recebimento</SubmitButton>
           </ActionForm>
@@ -51,19 +46,13 @@ export default async function FinancePage({ searchParams }: { searchParams: Prom
           <p className="mt-1 text-sm text-event-ink/60">Classifique o custo para manter o resultado e o histórico organizados.</p>
           <ActionForm action={createExpense} className="mt-4 grid gap-3">
             <Field label="Valor" name="amount" inputMode="decimal" placeholder="0,00" required />
-            <Field label="Data" name="occurred_at" type="date" required />
-            <Field label="Categoria" name="category_id" required>
-              <select className={selectClass} name="category_id" required>
+            <DatePickerField label="Data" name="occurred_at" required />
+            <SelectField label="Categoria" name="category_id" required>
                 <option value="">Selecione</option>
                 {categories?.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}
-              </select>
-            </Field>
-            <Field label="Evento" name="event_id">
-              <select className={selectClass} name="event_id"><option value="">Sem evento</option>{events.map((event: any) => <option key={event.id} value={event.id}>{event.title || event.event_fin_clients?.name || event.service_name_snapshot}</option>)}</select>
-            </Field>
-            <Field label="Conta" name="wallet_id">
-              <select className={selectClass} name="wallet_id"><option value="">Sem conta</option>{wallets.map((wallet: any) => <option key={wallet.id} value={wallet.id}>{wallet.name}</option>)}</select>
-            </Field>
+            </SelectField>
+            <SelectField label="Evento" name="event_id"><option value="">Sem evento</option>{events.map((event: any) => <option key={event.id} value={event.id}>{event.title || event.event_fin_clients?.name || event.service_name_snapshot}</option>)}</SelectField>
+            <SelectField label="Conta" name="wallet_id"><option value="">Sem conta</option>{wallets.map((wallet: any) => <option key={wallet.id} value={wallet.id}>{wallet.name}</option>)}</SelectField>
             <Field label="Descrição" name="description" />
             <SubmitButton>Adicionar despesa</SubmitButton>
           </ActionForm>
@@ -83,7 +72,7 @@ export default async function FinancePage({ searchParams }: { searchParams: Prom
           <p className="mt-1 text-sm text-event-ink/60">Separe caixa, banco ou conta digital para acompanhar o saldo.</p>
           <ActionForm action={createWallet} className="mt-4 grid gap-3 sm:grid-cols-2">
             <Field label="Nome" name="name" required />
-            <Field label="Tipo" name="type"><select className={selectClass} name="type"><option value="cash">Caixa</option><option value="bank">Banco</option><option value="digital">Digital</option><option value="other">Outro</option></select></Field>
+            <SelectField label="Tipo" name="type"><option value="cash">Caixa</option><option value="bank">Banco</option><option value="digital">Digital</option><option value="other">Outro</option></SelectField>
             <Field label="Saldo inicial" name="opening_balance" inputMode="decimal" placeholder="0,00" />
             <div className="self-end"><SubmitButton>Criar conta</SubmitButton></div>
           </ActionForm>
@@ -112,8 +101,6 @@ export default async function FinancePage({ searchParams }: { searchParams: Prom
     </div>
   );
 }
-
-const selectClass = "focus-ring min-h-12 w-full rounded-[16px] border border-event-ink/15 bg-event-paper px-4 text-base text-event-ink aria-[invalid=true]:border-red-400 aria-[invalid=true]:bg-red-50 sm:text-sm";
 
 function successMessage(type: string) {
   const messages: Record<string, string> = {

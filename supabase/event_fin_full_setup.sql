@@ -144,6 +144,7 @@ create table if not exists event_fin_events (
   service_name_snapshot text not null,
   sale_date date not null,
   event_date date,
+  event_time time,
   sale_amount numeric(14,2) not null check (sale_amount >= 0),
   status event_fin_event_status not null default 'scheduled',
   notes text,
@@ -151,6 +152,7 @@ create table if not exists event_fin_events (
   updated_at timestamptz not null default now(),
   cancelled_at timestamptz
 );
+alter table event_fin_events add column if not exists event_time time;
 create index if not exists event_fin_events_workspace_id_idx on event_fin_events(workspace_id);
 create index if not exists event_fin_events_client_id_idx on event_fin_events(client_id);
 create index if not exists event_fin_events_service_id_idx on event_fin_events(service_id);

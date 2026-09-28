@@ -92,10 +92,16 @@ export async function updateAllocationRules(_state: ActionState, formData: FormD
   effectiveFrom.setDate(1);
   const { data: set, error } = await supabase
     .from("event_fin_allocation_sets")
-    .insert({ workspace_id: workspaceId, effective_from: effectiveFrom.toISOString().slice(0, 10) })
+    .upsert(
+      { workspace_id: workspaceId, effective_from: effectiveFrom.toISOString().slice(0, 10) },
+      { onConflict: "workspace_id,effective_from" }
+    )
     .select("id")
     .single();
   if (error) return errorState("Não foi possível salvar a distribuição. Tente novamente.");
+
+  const { error: clearError } = await supabase.from("event_fin_allocation_items").delete().eq("allocation_set_id", set.id);
+  if (clearError) return errorState("Não foi possível atualizar os percentuais. Tente novamente.");
 
   const { error: itemsError } = await supabase.from("event_fin_allocation_items").insert(
     names.map((name, index) => ({
@@ -105,7 +111,7 @@ export async function updateAllocationRules(_state: ActionState, formData: FormD
       sort_order: index
     }))
   );
-  if (itemsError) return errorState("A distribuição foi iniciada, mas os percentuais não foram salvos. Tente novamente.");
+  if (itemsError) return errorState("Não foi possível salvar os percentuais. Tente novamente.");
   revalidatePath("/app/financeiro");
   revalidatePath("/app");
   redirect("/app/financeiro?salvo=distribuicao");

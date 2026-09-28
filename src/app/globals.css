@@ -50,6 +50,48 @@ textarea {
   background: rgba(190, 24, 93, 0.18);
 }
 
+.date-picker-popover .rdp-root {
+  --rdp-accent-color: var(--event-rose);
+  --rdp-accent-background-color: rgba(190, 24, 93, 0.1);
+  --rdp-day-height: 40px;
+  --rdp-day-width: 40px;
+  --rdp-day_button-height: 38px;
+  --rdp-day_button-width: 38px;
+  margin: 0 auto;
+}
+
+.date-picker-popover .rdp-month_grid {
+  width: 100%;
+  max-width: 20rem;
+  margin-inline: auto;
+}
+
+.date-picker-popover .rdp-dropdowns {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.date-picker-popover .rdp-dropdown_root {
+  border-radius: 10px;
+  background: rgba(190, 24, 93, 0.07);
+  padding: 0.35rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.date-picker-popover .rdp-day_button:hover:not(:disabled) {
+  background: rgba(190, 24, 93, 0.09);
+}
+
+.date-picker-popover .rdp-selected .rdp-day_button {
+  background: var(--event-rose);
+  color: white;
+}
+
+.date-picker-popover .rdp-today:not(.rdp-selected) .rdp-day_button {
+  border-color: rgba(190, 24, 93, 0.4);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
