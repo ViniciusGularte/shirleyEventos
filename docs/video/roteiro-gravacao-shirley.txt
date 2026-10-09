@@ -1,0 +1,143 @@
+ROTEIRO DE GRAVAÇÃO — EVENTOS SOB CONTROLE
+Público: nova usuária da plataforma
+Duração aproximada: 5 minutos e 10 segundos
+
+ORIENTAÇÃO DE GRAVAÇÃO
+- Fale como se estivesse sentada ao lado da pessoa que vai usar a plataforma.
+- Comece a frase antes de mover o mouse.
+- Faça a ação enquanto explica aquele campo.
+- Depois do clique ou preenchimento, deixe uma pausa curta antes de avançar.
+- Uma frase deve explicar uma ação. Não antecipe a próxima tela.
+
+1. ABERTURA
+Ação: mostrar a tela de acesso.
+Fala: Neste vídeo, eu vou montar um casamento do zero com você. É simples: cliente, evento e financeiro.
+
+2. ACESSO
+Ação: preencher o e-mail.
+Fala: Primeiro, entre com o e-mail em que você recebeu o convite.
+
+Ação: preencher a senha.
+Fala: Agora coloque a sua senha. Ela é pessoal, então não compartilhe com ninguém.
+
+Ação: clicar em Entrar.
+Fala: Tudo certo? Clique em Entrar.
+
+3. PAINEL E ORDEM DE TRABALHO
+Ação: mostrar o painel inicial.
+Fala: Este é o seu painel. É aqui que você bate o olho e entende o que vendeu, o que recebeu e o que ainda falta entrar.
+
+Ação: abrir Clientes ao final da frase.
+Fala: Para não se perder, siga sempre esta ordem: primeiro o cliente, depois o evento e, por último, o financeiro.
+
+4. CLIENTE
+Ação: mostrar a página Clientes.
+Fala: Aqui em Clientes, você guarda o contato de quem fechou o contrato.
+
+Ação: preencher Mariana Oliveira.
+Fala: No nome, coloque uma identificação fácil. Vou usar Mariana Oliveira.
+
+Ação: preencher o telefone.
+Fala: Depois, o telefone. Assim você encontra o contato rápido quando precisar.
+
+Ação: preencher o e-mail.
+Fala: E agora o e-mail, para contratos, propostas e outros documentos.
+
+Ação: clicar em Novo cliente.
+Fala: Confira os três campos e clique em Novo cliente.
+
+Ação: mostrar a confirmação verde.
+Fala: Pronto. A faixa verde confirma que a Mariana foi cadastrada.
+
+5. EVENTO
+Ação: abrir Eventos e clicar em Novo evento.
+Fala: Agora vamos criar o evento dela. Entre em Eventos e clique em Novo evento.
+
+Ação: selecionar Mariana Oliveira.
+Fala: Comece escolhendo a cliente. É isso que liga o evento ao cadastro da Mariana.
+
+Ação: selecionar o serviço.
+Fala: Em Serviço, selecione exatamente o pacote que ela contratou.
+
+Ação: preencher Casamento Mariana e Lucas.
+Fala: No título, use algo que você reconheça de primeira. Aqui vai ser Casamento Mariana e Lucas.
+
+Ação: selecionar a data da venda.
+Fala: Data da venda é o dia em que o contrato foi fechado.
+
+Ação: selecionar data, horário e Aplicar.
+Fala: Data do evento é o dia da cerimônia. Escolha também o horário.
+
+Ação: preencher R$ 3.500,00.
+Fala: Em Valor vendido, coloque o total do contrato, mesmo que o casal vá pagar parcelado.
+
+Ação: preencher R$ 1.000,00.
+Fala: Em Recebido agora, entra só o dinheiro que já caiu. Neste exemplo, o sinal de mil reais.
+
+Ação: preencher R$ 400,00.
+Fala: Se você já tem um custo de equipe previsto, registre aqui. Vou colocar quatrocentos reais.
+
+Ação: selecionar a conta.
+Fala: Agora escolha a conta onde o sinal entrou. Assim o saldo fica no lugar certo.
+
+Ação: preencher as observações.
+Fala: Nas observações, anote o que você pode precisar depois. Horário, local ou algum combinado importante.
+
+Ação: clicar em Salvar evento.
+Fala: Faça uma última conferência e clique em Salvar evento.
+
+Ação: mostrar o evento criado.
+Fala: Evento criado. Daqui para frente, todo valor que entra ou sai pode ficar ligado a este casamento.
+
+6. RECEBIMENTO
+Ação: abrir Financeiro.
+Fala: Vamos para o Financeiro registrar a próxima parcela.
+
+Ação: preencher valor e data do recebimento.
+Fala: Em Recebimento, coloque o valor e a data em que o dinheiro realmente entrou.
+
+Ação: selecionar evento e conta.
+Fala: Agora ligue a parcela ao casamento e escolha a conta que recebeu o dinheiro.
+
+Ação: preencher Segunda parcela e salvar.
+Fala: Na descrição, escreva algo curto e claro, como Segunda parcela. Depois, salve.
+
+Ação: mostrar a confirmação.
+Fala: Recebimento salvo. O caixa e o valor que falta receber já foram atualizados.
+
+7. DESPESA
+Ação: preencher R$ 180,00 e a data.
+Fala: Do outro lado ficam as despesas. Vou registrar cento e oitenta reais de material.
+
+Ação: selecionar categoria, evento e conta.
+Fala: Escolha a categoria, o evento e a conta de onde o dinheiro saiu.
+
+Ação: preencher Material de apoio e salvar.
+Fala: Na descrição, vou colocar Material de apoio. Agora é só adicionar a despesa.
+
+Ação: mostrar a confirmação.
+Fala: Despesa salva. É esse cuidado que mostra o lucro real, e não só o valor da venda.
+
+8. CONTAS E DISTRIBUIÇÃO
+Ação: mostrar Contas.
+Fala: Mais abaixo estão as Contas. Elas mostram onde o dinheiro está: banco, caixa ou outra carteira.
+
+Ação: mostrar Distribuição.
+Fala: Na Distribuição, você define quanto do resultado vai para cada objetivo, como pró-labore, empresa e reserva.
+
+9. CONFERÊNCIA FINAL
+Ação: voltar ao Início.
+Fala: Para fechar, volte ao Início e confira o resumo.
+
+Ação: mostrar os indicadores do topo.
+Fala: Vendido é o valor total dos contratos. Recebido é o que já entrou. A receber é o que ainda está pendente.
+
+Ação: mostrar resultado e distribuição.
+Fala: No resultado, o sistema já desconta as despesas. Logo abaixo, ele mostra como esse valor foi distribuído.
+
+Ação: manter o painel na tela.
+Fala: O segredo é simples: recebeu, registre. Gastou, registre. Assim o painel sempre mostra a realidade.
+
+10. ENCERRAMENTO
+Ação: manter o resumo final visível.
+Fala: Pronto. Cadastre o cliente, crie o evento e mantenha o financeiro em dia. O restante, o sistema organiza para você.

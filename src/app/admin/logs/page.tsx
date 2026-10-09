@@ -25,7 +25,12 @@ function formatAction(action: string) {
     student_active: "Acesso reativado",
     student_grace: "Aluna em carência",
     student_suspended: "Acesso suspenso",
-    student_archived: "Aluna arquivada"
+    student_archived: "Aluna arquivada",
+    student_plan_updated: "Dados do plano atualizados",
+    student_plan_paused: "Plano pausado",
+    student_plan_resumed: "Plano retomado",
+    student_payment_reminder: "Lembrete de pagamento registrado",
+    student_payment_registered: "Pagamento registrado"
   };
   return labels[action] ?? action.replaceAll("_", " ");
 }

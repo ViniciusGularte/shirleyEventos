@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guia da Aluna — Eventos Sob Controle</title>
+<style>
+  @page {
+    size: A4;
+    margin: 14mm 13mm 17mm;
+    @bottom-left { content: "Eventos Sob Controle • Guia da aluna"; color: #786b73; font-size: 8pt; }
+    @bottom-right { content: "Pág. " counter(page) " de " counter(pages); color: #786b73; font-size: 8pt; }
+  }
+  @page:first { @bottom-left { content: ""; } @bottom-right { content: ""; } }
+  * { box-sizing: border-box; }
+  :root { --ink: #120c12; --paper: #fff8fb; --rose: #be185d; --line: #eadde4; --muted: #6f626a; --green: #047857; --amber: #a16207; --red: #b91c1c; }
+  html, body { margin: 0; background: white; }
+  body { font-family: Arial, Helvetica, sans-serif; color: var(--ink); line-height: 1.48; }
+  h1, h2, h3, h4, p { margin-top: 0; }
+  h1 { margin-bottom: 14px; font-size: 36pt; line-height: 1.02; letter-spacing: -1.8px; }
+  h2 { margin-bottom: 10px; font-size: 22pt; line-height: 1.12; letter-spacing: -.5px; }
+  h3 { margin-bottom: 7px; font-size: 14pt; line-height: 1.25; }
+  p, li, td, th { font-size: 9.5pt; }
+  p { margin-bottom: 8px; }
+  ul, ol { margin: 6px 0 0; padding-left: 20px; }
+  li { margin: 4px 0; }
+  .page { break-before: page; }
+  .cover { min-height: 265mm; margin: -14mm -13mm -17mm; padding: 24mm 19mm; display: flex; flex-direction: column; justify-content: space-between; background: radial-gradient(circle at 85% 15%, #fbcfe8 0, transparent 30%), linear-gradient(145deg, #fff8fb 0%, #fff 52%, #fce7f3 100%); }
+  .cover-mark { display: inline-flex; align-items: center; gap: 9px; color: var(--rose); font-size: 10pt; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+  .cover-dot { width: 13px; height: 13px; border-radius: 50%; background: var(--rose); box-shadow: 0 0 0 7px rgba(190,24,93,.12); }
+  .cover-copy { max-width: 155mm; }
+  .cover-subtitle { max-width: 140mm; color: var(--muted); font-size: 14pt; line-height: 1.5; }
+  .cover-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 145mm; }
+  .meta-card { padding: 13px 15px; border: 1px solid rgba(18,12,18,.1); border-radius: 14px; background: rgba(255,255,255,.78); }
+  .meta-card span { display: block; margin-bottom: 4px; color: var(--muted); font-size: 8pt; letter-spacing: .06em; text-transform: uppercase; }
+  .meta-card strong { font-size: 10pt; }
+  .section-kicker { margin-bottom: 7px; color: var(--rose); font-size: 8.5pt; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+  .lead { max-width: 165mm; color: var(--muted); font-size: 11pt; line-height: 1.55; }
+  .box { margin: 11px 0; padding: 13px 15px; border: 1px solid var(--line); border-radius: 13px; background: var(--paper); break-inside: avoid; }
+  .box.white { background: white; }
+  .box.tip { border-left: 4px solid var(--rose); }
+  .box.warning { border-left: 4px solid var(--amber); background: #fffbeb; }
+  .box.success { border-left: 4px solid var(--green); background: #ecfdf5; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin: 14px 0; counter-reset: flow; }
+  .flow-card { min-height: 88px; padding: 11px; border-radius: 12px; background: var(--ink); color: white; break-inside: avoid; }
+  .flow-card::before { counter-increment: flow; content: counter(flow); display: grid; place-items: center; width: 21px; height: 21px; margin-bottom: 8px; border-radius: 50%; background: var(--rose); font-size: 8pt; font-weight: 800; }
+  .flow-card strong { display: block; margin-bottom: 4px; font-size: 9pt; }
+  .flow-card small { color: rgba(255,255,255,.74); font-size: 7.7pt; line-height: 1.35; }
+  .steps { counter-reset: tutorial; list-style: none; padding: 0; }
+  .steps > li { position: relative; min-height: 28px; padding: 2px 0 10px 34px; counter-increment: tutorial; }
+  .steps > li::before { content: counter(tutorial); position: absolute; left: 0; top: 0; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--rose); color: white; font-weight: 800; }
+  .screen { margin: 13px 0 17px; break-inside: avoid; }
+  .screen img { display: block; width: 100%; max-height: 180mm; object-fit: contain; object-position: top; border: 1px solid var(--line); border-radius: 11px; background: var(--paper); }
+  .screen figcaption { margin-top: 6px; color: var(--muted); font-size: 8pt; text-align: center; }
+  .mobile-shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; align-items: start; margin-top: 12px; }
+  .mobile-shots figure { margin: 0; break-inside: avoid; }
+  .mobile-shots img { display: block; width: 100%; border: 1px solid var(--line); border-radius: 10px; }
+  .mobile-shots figcaption { margin-top: 5px; color: var(--muted); font-size: 7.5pt; text-align: center; }
+  table { width: 100%; margin: 10px 0 14px; border-collapse: collapse; break-inside: avoid; }
+  th, td { padding: 7px 8px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+  th { background: var(--paper); font-weight: 800; }
+  .status { display: inline-block; padding: 3px 8px; border-radius: 999px; font-size: 8pt; font-weight: 800; }
+  .status.green { color: #065f46; background: #d1fae5; }
+  .status.amber { color: #92400e; background: #fef3c7; }
+  .status.red { color: #991b1b; background: #fee2e2; }
+  .checklist { list-style: none; padding-left: 0; columns: 2; column-gap: 20px; }
+  .checklist li { position: relative; padding-left: 20px; break-inside: avoid; }
+  .checklist li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 900; }
+  .small { color: var(--muted); font-size: 8pt; }
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <div class="cover-mark"><span class="cover-dot"></span> Guia da aluna</div>
+  <div class="cover-copy">
+    <h1>Eventos<br>Sob Controle</h1>
+    <p class="cover-subtitle">Um guia simples para organizar clientes, eventos, recebimentos e despesas — no computador ou no celular.</p>
+  </div>
+  <div class="cover-meta">
+    <div class="meta-card"><span>Atualização</span><strong>8 de outubro de 2026</strong></div>
+    <div class="meta-card"><span>Endereço</span><strong>eventos-omega-five.vercel.app</strong></div>
+    <div class="meta-card"><span>Feito para</span><strong>Alunas da formação</strong></div>
+    <div class="meta-card"><span>Você vai aprender</span><strong>Cliente, evento e financeiro</strong></div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Comece por aqui</div>
+  <h2>A ordem que deixa tudo organizado</h2>
+  <p class="lead">Você não precisa aprender tudo de uma vez. Siga esta sequência sempre que fechar um novo trabalho.</p>
+  <div class="flow">
+    <div class="flow-card"><strong>Entrar</strong><small>Use seu e-mail e sua senha.</small></div>
+    <div class="flow-card"><strong>Criar cliente</strong><small>Guarde nome e contato.</small></div>
+    <div class="flow-card"><strong>Criar evento</strong><small>Registre serviço, data e venda.</small></div>
+    <div class="flow-card"><strong>Lançar valores</strong><small>Anote tudo que entra e sai.</small></div>
+    <div class="flow-card"><strong>Acompanhar</strong><small>Confira o resultado no painel.</small></div>
+  </div>
+  <ol class="steps">
+    <li><strong>Cadastre o cliente.</strong> Faça isso antes de criar o evento.</li>
+    <li><strong>Crie o evento.</strong> Informe serviço, datas e valores combinados.</li>
+    <li><strong>Registre o financeiro.</strong> Recebeu ou gastou? Lance no mesmo dia.</li>
+    <li><strong>Confira o painel.</strong> Use os números para acompanhar seu negócio.</li>
+  </ol>
+  <div class="box success"><strong>Regra simples:</strong> recebeu, registre. Gastou, registre. Assim o painel sempre mostra a realidade.</div>
+  <h3>O que existe em cada área</h3>
+  <table>
+    <thead><tr><th>Área</th><th>Para que serve</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Início</strong></td><td>Mostra vendas, recebimentos, valores pendentes e resultado.</td></tr>
+      <tr><td><strong>Eventos</strong></td><td>Organiza contratos, serviços, datas e valores.</td></tr>
+      <tr><td><strong>Financeiro</strong></td><td>Registra recebimentos, despesas, contas e distribuição.</td></tr>
+      <tr><td><strong>Clientes</strong></td><td>Guarda os contatos ligados aos eventos.</td></tr>
+      <tr><td><strong>Configurações</strong></td><td>Mostra seu perfil, atalhos e a opção de sair.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Primeiro acesso</div>
+  <h2>Entre e crie sua senha</h2>
+  <p class="lead">Use o e-mail em que você recebeu o acesso. No primeiro uso, siga as orientações da mensagem recebida para definir sua senha.</p>
+  <div class="grid-2">
+    <div class="box white">
+      <h3>Para entrar</h3>
+      <ol class="steps">
+        <li>Informe seu e-mail.</li>
+        <li>Digite sua senha.</li>
+        <li>Selecione <strong>Entrar</strong>.</li>
+      </ol>
+    </div>
+    <div class="box white">
+      <h3>Esqueceu a senha?</h3>
+      <ol class="steps">
+        <li>Selecione <strong>Esqueci minha senha</strong>.</li>
+        <li>Informe seu e-mail.</li>
+        <li>Abra o link recebido e crie outra senha.</li>
+      </ol>
+    </div>
+  </div>
+  <div class="box tip"><strong>Não recebeu a mensagem?</strong> Confira spam e lixo eletrônico, espere alguns minutos e confirme se o endereço informado está correto.</div>
+  <figure class="screen"><img src="screenshots/01-login.png" alt="Tela com os campos de e-mail e senha"><figcaption>Use o e-mail cadastrado e sua senha pessoal.</figcaption></figure>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Seu primeiro passo</div>
+  <h2>Use o guia inicial</h2>
+  <p class="lead">Ao entrar pela primeira vez, você encontra quatro tarefas práticas. O progresso muda conforme você usa a plataforma.</p>
+  <ol class="steps">
+    <li><strong>Cadastrar cliente.</strong> Crie o primeiro contato.</li>
+    <li><strong>Criar evento.</strong> Registre a primeira venda.</li>
+    <li><strong>Organizar o financeiro.</strong> Lance um recebimento ou uma despesa.</li>
+    <li><strong>Acompanhar o painel.</strong> Veja como os indicadores foram atualizados.</li>
+  </ol>
+  <div class="box tip"><strong>Quer fazer depois?</strong> Use “Pular por agora”. Você poderá abrir o Guia inicial novamente nas Configurações.</div>
+  <figure class="screen"><img src="screenshots/19-app-boas-vindas.png" alt="Guia inicial com quatro tarefas e barra de progresso"><figcaption>O guia acompanha tarefas reais, sem bloquear seu acesso.</figcaption></figure>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Início</div>
+  <h2>Entenda seu painel</h2>
+  <p class="lead">O painel responde rapidamente quanto você vendeu, quanto já recebeu e quanto ainda falta entrar.</p>
+  <table>
+    <thead><tr><th>Indicador</th><th>O que significa</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Vendido</strong></td><td>Valor total dos eventos vendidos no período.</td></tr>
+      <tr><td><strong>Recebido</strong></td><td>Dinheiro que você já registrou como entrada.</td></tr>
+      <tr><td><strong>A receber</strong></td><td>Parte das vendas que ainda está pendente.</td></tr>
+      <tr><td><strong>Resultado</strong></td><td>Valor recebido menos as despesas registradas.</td></tr>
+      <tr><td><strong>Eventos</strong></td><td>Quantidade de eventos cadastrados.</td></tr>
+      <tr><td><strong>Ticket médio</strong></td><td>Média do valor vendido por evento.</td></tr>
+    </tbody>
+  </table>
+  <div class="box tip"><strong>Painel zerado?</strong> Ele começa a ganhar informações quando você cadastra eventos, recebimentos e despesas.</div>
+  <figure class="screen"><img src="screenshots/07-app-dashboard.png" alt="Painel com indicadores, gráficos e distribuição"><figcaption>Use os indicadores para acompanhar o negócio sem fazer contas à mão.</figcaption></figure>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Clientes</div>
+  <h2>Cadastre o contato antes do evento</h2>
+  <p>O cadastro do cliente mantém eventos, pagamentos e despesas ligados à pessoa correta.</p>
+  <ol class="steps">
+    <li>Abra <strong>Clientes</strong>.</li>
+    <li>Preencha o <strong>Nome</strong>.</li>
+    <li>Adicione telefone e e-mail quando tiver essas informações.</li>
+    <li>Selecione <strong>Novo cliente</strong>.</li>
+  </ol>
+  <div class="box tip"><strong>Evite duplicidade:</strong> antes de cadastrar, procure o nome na lista. Use telefone ou e-mail para diferenciar pessoas com nomes iguais.</div>
+  <figure class="screen"><img src="screenshots/10-app-clientes.png" alt="Página de clientes com formulário de cadastro"><figcaption>O formulário fica no topo e os contatos cadastrados aparecem abaixo.</figcaption></figure>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Eventos</div>
+  <h2>Crie e acompanhe seus eventos</h2>
+  <p>A lista mostra cliente, serviço, data, valor vendido, valor recebido, saldo a receber e resultado previsto.</p>
+  <div class="grid-3">
+    <div class="box white"><span class="status amber">Agendado</span><p class="small">Evento futuro ou ainda não concluído.</p></div>
+    <div class="box white"><span class="status green">Realizado</span><p class="small">Trabalho concluído.</p></div>
+    <div class="box white"><span class="status red">Cancelado</span><p class="small">Evento preservado no histórico.</p></div>
+  </div>
+  <ol class="steps">
+    <li>Abra <strong>Eventos</strong>.</li>
+    <li>Selecione <strong>Novo evento</strong>.</li>
+    <li>Preencha os campos marcados com *.</li>
+    <li>Revise as informações e salve.</li>
+  </ol>
+  <figure class="screen"><img src="screenshots/08-app-eventos.png" alt="Lista de eventos e botão Novo evento"><figcaption>Selecione um evento para consultar todos os detalhes.</figcaption></figure>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Novo evento</div>
+  <h2>Preencha cada campo</h2>
+  <table>
+    <thead><tr><th>Campo</th><th>Como preencher</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Cliente *</strong></td><td>Escolha um cliente já cadastrado.</td></tr>
+      <tr><td><strong>Serviço *</strong></td><td>Selecione o pacote ou serviço vendido.</td></tr>
+      <tr><td><strong>Título</strong></td><td>Use um nome fácil de reconhecer, como “Casamento Ana e João”.</td></tr>
+      <tr><td><strong>Data da venda *</strong></td><td>Dia em que o contrato foi fechado.</td></tr>
+      <tr><td><strong>Data do evento</strong></td><td>Dia e horário da realização.</td></tr>
+      <tr><td><strong>Valor vendido *</strong></td><td>Total combinado, mesmo que o pagamento seja parcelado.</td></tr>
+      <tr><td><strong>Recebido agora</strong></td><td>Valor que já entrou, como o sinal.</td></tr>
+      <tr><td><strong>Custo de equipe inicial</strong></td><td>Valor já previsto para a equipe deste evento.</td></tr>
+      <tr><td><strong>Conta</strong></td><td>Local em que o dinheiro entrou ou de onde saiu.</td></tr>
+      <tr><td><strong>Observações</strong></td><td>Horário, local e combinados que você queira consultar depois.</td></tr>
+    </tbody>
+  </table>
+  <figure class="screen"><img src="screenshots/09-app-novo-evento.png" alt="Formulário de novo evento"><figcaption>Revise cliente, serviço, datas e valores antes de salvar.</figcaption></figure>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Detalhe do evento</div>
+  <h2>Acompanhe valores e andamento</h2>
+  <ol class="steps">
+    <li>Abra <strong>Eventos</strong> e selecione o cartão desejado.</li>
+    <li>Confira vendido, recebido, a receber, custos e resultado previsto.</li>
+    <li>Use <strong>Marcar como realizado</strong> quando o trabalho terminar.</li>
+    <li>Use <strong>Cancelar evento</strong> somente quando necessário.</li>
+  </ol>
+  <div class="box warning"><strong>Atenção:</strong> cancelar preserva o evento no histórico. Confira também as movimentações financeiras que já foram registradas.</div>
+  <h3>Como os números são calculados</h3>
+  <table>
+    <tbody>
+      <tr><th>A receber</th><td>Valor vendido − recebimentos ligados ao evento.</td></tr>
+      <tr><th>Resultado previsto</th><td>Valor vendido − despesas ligadas ao evento.</td></tr>
+      <tr><th>Resultado do caixa</th><td>Recebimentos − despesas efetivamente registradas.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Financeiro</div>
+  <h2>Registre tudo que entra e sai</h2>
+  <div class="grid-2">
+    <div class="box white">
+      <h3>Recebimento</h3>
+      <ol class="steps">
+        <li>Informe valor e data.</li>
+        <li>Escolha o evento.</li>
+        <li>Selecione conta e forma de pagamento.</li>
+        <li>Escreva uma descrição e salve.</li>
+      </ol>
+    </div>
+    <div class="box white">
+      <h3>Despesa</h3>
+      <ol class="steps">
+        <li>Informe valor e data.</li>
+        <li>Escolha a categoria.</li>
+        <li>Selecione evento e conta.</li>
+        <li>Descreva o gasto e salve.</li>
+      </ol>
+    </div>
+  </div>
+  <div class="box tip"><strong>Use descrições claras:</strong> “Segunda parcela”, “Material de apoio” e “Deslocamento” são mais fáceis de entender no futuro.</div>
+  <figure class="screen"><img src="screenshots/11-app-financeiro.png" alt="Página com formulários de recebimento e despesa"><figcaption>Recebimentos e despesas ficam lado a lado no computador.</figcaption></figure>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Financeiro</div>
+  <h2>Contas e distribuição</h2>
+  <h3>Contas</h3>
+  <p>Crie uma conta para cada lugar onde o dinheiro fica: caixa físico, banco ou conta digital. O saldo considera o valor inicial e as movimentações ligadas a ela.</p>
+  <h3>Distribuição</h3>
+  <p>Os percentuais ajudam a planejar quanto do resultado será separado para cada objetivo. A soma não pode passar de 100%.</p>
+  <table>
+    <thead><tr><th>Exemplo</th><th>Objetivo</th></tr></thead>
+    <tbody>
+      <tr><td>Pró-labore</td><td>Sua remuneração pelo trabalho.</td></tr>
+      <tr><td>Reserva de emergência</td><td>Proteção para períodos com menos eventos.</td></tr>
+      <tr><td>Investimento na empresa</td><td>Equipamentos, melhorias e estrutura.</td></tr>
+      <tr><td>Marketing</td><td>Divulgação e conquista de clientes.</td></tr>
+      <tr><td>Conhecimento</td><td>Cursos e desenvolvimento profissional.</td></tr>
+    </tbody>
+  </table>
+  <div class="box warning"><strong>Importante:</strong> a distribuição é uma sugestão. Ela não transfere dinheiro entre suas contas bancárias.</div>
+  <figure class="screen"><img src="screenshots/12-app-configuracoes.png" alt="Configurações com perfil e atalhos"><figcaption>Nas Configurações, você encontra seu perfil, atalhos e a opção de sair.</figcaption></figure>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Uso no celular</div>
+  <h2>A plataforma acompanha sua rotina</h2>
+  <p class="lead">No celular, as telas ficam em uma coluna e a navegação aparece na parte inferior.</p>
+  <table>
+    <thead><tr><th>O que você quer fazer</th><th>No celular</th></tr></thead>
+    <tbody>
+      <tr><td>Trocar de área</td><td>Use Início, Eventos, Financeiro, Clientes e Mais na barra inferior.</td></tr>
+      <tr><td>Criar evento</td><td>Abra Eventos e selecione o botão destacado.</td></tr>
+      <tr><td>Ver contas e distribuição</td><td>Role a tela do Financeiro para baixo.</td></tr>
+      <tr><td>Sair com segurança</td><td>Use o ícone no topo ou “Sair do sistema” em Mais.</td></tr>
+    </tbody>
+  </table>
+  <div class="mobile-shots">
+    <figure><img src="screenshots/14-mobile-dashboard.png" alt="Painel no celular"><figcaption>Início</figcaption></figure>
+    <figure><img src="screenshots/15-mobile-eventos.png" alt="Eventos no celular"><figcaption>Eventos</figcaption></figure>
+    <figure><img src="screenshots/16-mobile-financeiro.png" alt="Financeiro no celular"><figcaption>Financeiro</figcaption></figure>
+  </div>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Ajuda rápida</div>
+  <h2>Dúvidas frequentes</h2>
+  <div class="box white"><h3>Por que o painel está zerado?</h3><p>Cadastre um evento e registre recebimentos e despesas. O painel depende dessas informações.</p></div>
+  <div class="box white"><h3>Por que não consigo criar um evento?</h3><p>Confirme se existe um cliente cadastrado e se todos os campos com * foram preenchidos.</p></div>
+  <div class="box white"><h3>O saldo da conta não mudou.</h3><p>Confira se você selecionou a conta correta ao registrar a movimentação.</p></div>
+  <div class="box white"><h3>O valor “A receber” parece incorreto.</h3><p>Verifique se todos os recebimentos foram ligados ao evento e se o valor vendido está correto.</p></div>
+  <div class="box white"><h3>Os percentuais não salvam.</h3><p>Cada percentual deve ficar entre 0 e 100, e a soma não pode passar de 100%.</p></div>
+  <div class="box white"><h3>Não consigo entrar.</h3><p>Confira e-mail, senha e espaços extras. Se necessário, use “Esqueci minha senha”.</p></div>
+</section>
+
+<section class="page">
+  <div class="section-kicker">Para lembrar</div>
+  <h2>Checklist de uma rotina organizada</h2>
+  <ul class="checklist">
+    <li>Não compartilhar sua senha.</li>
+    <li>Sair em aparelhos compartilhados.</li>
+    <li>Evitar clientes duplicados.</li>
+    <li>Cadastrar o cliente antes do evento.</li>
+    <li>Revisar valores antes de salvar.</li>
+    <li>Registrar entradas no dia em que ocorrerem.</li>
+    <li>Registrar todas as despesas.</li>
+    <li>Escolher a categoria correta.</li>
+    <li>Ligar movimentações aos eventos.</li>
+    <li>Selecionar a conta financeira correta.</li>
+    <li>Usar descrições fáceis de reconhecer.</li>
+    <li>Marcar eventos realizados.</li>
+    <li>Conferir o painel com frequência.</li>
+    <li>Revisar a distribuição periodicamente.</li>
+  </ul>
+  <div class="box success">
+    <h3>O essencial em uma frase</h3>
+    <p>Cadastre o cliente, crie o evento e mantenha o financeiro em dia. O restante, a plataforma organiza para você.</p>
+  </div>
+  <p class="small">Este guia foi preparado para as alunas da formação e usa imagens reais da plataforma. Alguns números podem variar conforme os dados cadastrados em cada conta.</p>
+</section>
+
+</body>
+</html>

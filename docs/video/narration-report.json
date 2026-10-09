@@ -1,0 +1,300 @@
+{
+  "engine": "Chatterbox Multilingual PT-BR",
+  "device": "cuda",
+  "source": "/home/vinicius/Downloads/WhatsApp Ptt 2026-10-04 at 18.41.06.ogg",
+  "reference": {
+    "snr_db": 25.16,
+    "speaker_consistency": 0.986
+  },
+  "output": "/home/vinicius/Documentos/eventosProjeto/docs/manual/screenshots/shirley-narration.mp3",
+  "duration_seconds": 318.024,
+  "chunks": [
+    {
+      "index": 0,
+      "start_ms": 3783,
+      "slot_seconds": 7.675,
+      "voice_seconds": 6.92,
+      "text": "Neste vídeo, eu vou montar um casamento do zero com você. É simples: cliente, evento e financeiro."
+    },
+    {
+      "index": 1,
+      "start_ms": 11558,
+      "slot_seconds": 5.311,
+      "voice_seconds": 4.68,
+      "text": "Primeiro, entre com o e-mail em que você recebeu o convite."
+    },
+    {
+      "index": 2,
+      "start_ms": 16969,
+      "slot_seconds": 9.827,
+      "voice_seconds": 8.96,
+      "text": "Agora coloque a sua senha. Ela é pessoal, então não compartilhe com ninguém."
+    },
+    {
+      "index": 3,
+      "start_ms": 26896,
+      "slot_seconds": 8.314,
+      "voice_seconds": 2.8,
+      "text": "Tudo certo? Clique em Entrar."
+    },
+    {
+      "index": 4,
+      "start_ms": 35310,
+      "slot_seconds": 9.319,
+      "voice_seconds": 8.48,
+      "text": "Este é o seu painel. É aqui que você bate o olho e entende o que vendeu, o que recebeu e o que ainda falta entrar."
+    },
+    {
+      "index": 5,
+      "start_ms": 44729,
+      "slot_seconds": 8.899,
+      "voice_seconds": 8.08,
+      "text": "Para não se perder, siga sempre esta ordem: primeiro o cliente, depois o evento e, por último, o financeiro."
+    },
+    {
+      "index": 6,
+      "start_ms": 53728,
+      "slot_seconds": 5.986,
+      "voice_seconds": 5.32,
+      "text": "Aqui em Clientes, você guarda o contato de quem fechou o contrato."
+    },
+    {
+      "index": 7,
+      "start_ms": 59814,
+      "slot_seconds": 8.013,
+      "voice_seconds": 7.24,
+      "text": "No nome, coloque uma identificação fácil. Vou usar Mariana Oliveira."
+    },
+    {
+      "index": 8,
+      "start_ms": 67927,
+      "slot_seconds": 8.517,
+      "voice_seconds": 7.72,
+      "text": "Depois, o telefone. Assim você encontra o contato rápido quando precisar."
+    },
+    {
+      "index": 9,
+      "start_ms": 76544,
+      "slot_seconds": 7.506,
+      "voice_seconds": 6.76,
+      "text": "E agora o e-mail, para contratos, propostas e outros documentos."
+    },
+    {
+      "index": 10,
+      "start_ms": 84150,
+      "slot_seconds": 5.227,
+      "voice_seconds": 4.6,
+      "text": "Confira os três campos e clique em Novo cliente."
+    },
+    {
+      "index": 11,
+      "start_ms": 89477,
+      "slot_seconds": 5.607,
+      "voice_seconds": 4.96,
+      "text": "Pronto. A faixa verde confirma que a Mariana foi cadastrada."
+    },
+    {
+      "index": 12,
+      "start_ms": 95184,
+      "slot_seconds": 7.0,
+      "voice_seconds": 6.28,
+      "text": "Agora vamos criar o evento dela. Entre em Eventos e clique em Novo evento."
+    },
+    {
+      "index": 13,
+      "start_ms": 102284,
+      "slot_seconds": 6.451,
+      "voice_seconds": 5.76,
+      "text": "Comece escolhendo a cliente. É isso que liga o evento ao cadastro da Mariana."
+    },
+    {
+      "index": 14,
+      "start_ms": 108835,
+      "slot_seconds": 5.86,
+      "voice_seconds": 5.2,
+      "text": "Em Serviço, selecione exatamente o pacote que ela contratou."
+    },
+    {
+      "index": 15,
+      "start_ms": 114795,
+      "slot_seconds": 7.377,
+      "voice_seconds": 6.64,
+      "text": "No título, use algo que você reconheça de primeira. Aqui vai ser Casamento Mariana e Lucas."
+    },
+    {
+      "index": 16,
+      "start_ms": 122272,
+      "slot_seconds": 5.65,
+      "voice_seconds": 5.0,
+      "text": "Data da venda é o dia em que o contrato foi fechado."
+    },
+    {
+      "index": 17,
+      "start_ms": 128022,
+      "slot_seconds": 7.145,
+      "voice_seconds": 4.64,
+      "text": "Data do evento é o dia da cerimônia. Escolha também o horário."
+    },
+    {
+      "index": 18,
+      "start_ms": 135267,
+      "slot_seconds": 7.21,
+      "voice_seconds": 6.48,
+      "text": "Em Valor vendido, coloque o total do contrato, mesmo que o casal vá pagar parcelado."
+    },
+    {
+      "index": 19,
+      "start_ms": 142577,
+      "slot_seconds": 7.295,
+      "voice_seconds": 6.56,
+      "text": "Em Recebido agora, entra só o dinheiro que já caiu. Neste exemplo, o sinal de mil reais."
+    },
+    {
+      "index": 20,
+      "start_ms": 149972,
+      "slot_seconds": 6.873,
+      "voice_seconds": 6.16,
+      "text": "Se você já tem um custo de equipe previsto, registre aqui. Vou colocar quatrocentos reais."
+    },
+    {
+      "index": 21,
+      "start_ms": 156945,
+      "slot_seconds": 6.789,
+      "voice_seconds": 6.08,
+      "text": "Agora escolha a conta onde o sinal entrou. Assim o saldo fica no lugar certo."
+    },
+    {
+      "index": 22,
+      "start_ms": 163834,
+      "slot_seconds": 9.994,
+      "voice_seconds": 9.12,
+      "text": "Nas observações, anote o que você pode precisar depois. Horário, local ou algum combinado importante."
+    },
+    {
+      "index": 23,
+      "start_ms": 173928,
+      "slot_seconds": 8.769,
+      "voice_seconds": 4.6,
+      "text": "Faça uma última conferência e clique em Salvar evento."
+    },
+    {
+      "index": 24,
+      "start_ms": 182797,
+      "slot_seconds": 9.362,
+      "voice_seconds": 8.52,
+      "text": "Evento criado. Daqui para frente, todo valor que entra ou sai pode ficar ligado a este casamento."
+    },
+    {
+      "index": 25,
+      "start_ms": 192259,
+      "slot_seconds": 4.469,
+      "voice_seconds": 3.88,
+      "text": "Vamos para o Financeiro registrar a próxima parcela."
+    },
+    {
+      "index": 26,
+      "start_ms": 196828,
+      "slot_seconds": 6.702,
+      "voice_seconds": 6.0,
+      "text": "Em Recebimento, coloque o valor e a data em que o dinheiro realmente entrou."
+    },
+    {
+      "index": 27,
+      "start_ms": 203630,
+      "slot_seconds": 6.408,
+      "voice_seconds": 5.72,
+      "text": "Agora ligue a parcela ao casamento e escolha a conta que recebeu o dinheiro."
+    },
+    {
+      "index": 28,
+      "start_ms": 210138,
+      "slot_seconds": 8.518,
+      "voice_seconds": 7.72,
+      "text": "Na descrição, escreva algo curto e claro, como Segunda parcela. Depois, salve."
+    },
+    {
+      "index": 29,
+      "start_ms": 218756,
+      "slot_seconds": 7.042,
+      "voice_seconds": 6.32,
+      "text": "Recebimento salvo. O caixa e o valor que falta receber já foram atualizados."
+    },
+    {
+      "index": 30,
+      "start_ms": 225898,
+      "slot_seconds": 6.83,
+      "voice_seconds": 6.12,
+      "text": "Do outro lado ficam as despesas. Vou registrar cento e oitenta reais de material."
+    },
+    {
+      "index": 31,
+      "start_ms": 232828,
+      "slot_seconds": 6.873,
+      "voice_seconds": 6.16,
+      "text": "Escolha a categoria, o evento e a conta de onde o dinheiro saiu."
+    },
+    {
+      "index": 32,
+      "start_ms": 239801,
+      "slot_seconds": 6.746,
+      "voice_seconds": 6.04,
+      "text": "Na descrição, vou colocar Material de apoio. Agora é só adicionar a despesa."
+    },
+    {
+      "index": 33,
+      "start_ms": 246647,
+      "slot_seconds": 9.217,
+      "voice_seconds": 6.88,
+      "text": "Despesa salva. É esse cuidado que mostra o lucro real, e não só o valor da venda."
+    },
+    {
+      "index": 34,
+      "start_ms": 255964,
+      "slot_seconds": 8.263,
+      "voice_seconds": 7.48,
+      "text": "Mais abaixo estão as Contas. Elas mostram onde o dinheiro está: banco, caixa ou outra carteira."
+    },
+    {
+      "index": 35,
+      "start_ms": 264327,
+      "slot_seconds": 12.214,
+      "voice_seconds": 9.4,
+      "text": "Na Distribuição, você define quanto do resultado vai para cada objetivo, como pró-labore, empresa e reserva."
+    },
+    {
+      "index": 36,
+      "start_ms": 276641,
+      "slot_seconds": 5.228,
+      "voice_seconds": 4.6,
+      "text": "Para fechar, volte ao Início e confira o resumo."
+    },
+    {
+      "index": 37,
+      "start_ms": 281969,
+      "slot_seconds": 9.785,
+      "voice_seconds": 7.52,
+      "text": "Vendido é o valor total dos contratos. Recebido é o que já entrou. A receber é o que ainda está pendente."
+    },
+    {
+      "index": 38,
+      "start_ms": 291854,
+      "slot_seconds": 8.39,
+      "voice_seconds": 7.6,
+      "text": "No resultado, o sistema já desconta as despesas. Logo abaixo, ele mostra como esse valor foi distribuído."
+    },
+    {
+      "index": 39,
+      "start_ms": 300344,
+      "slot_seconds": 7.842,
+      "voice_seconds": 7.08,
+      "text": "O segredo é simples: recebeu, registre. Gastou, registre. Assim o painel sempre mostra a realidade."
+    },
+    {
+      "index": 40,
+      "start_ms": 308286,
+      "slot_seconds": 8.914,
+      "voice_seconds": 8.0,
+      "text": "Pronto. Cadastre o cliente, crie o evento e mantenha o financeiro em dia. O restante, o sistema organiza para você."
+    }
+  ]
+}

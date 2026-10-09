@@ -8,6 +8,7 @@ import { SubmitButton } from "@/components/ui/simple-form";
 export default async function LoginPage({ searchParams }: { searchParams: Promise<{ erro?: string; sucesso?: string }> }) {
   const params = await searchParams;
   const hasLoginError = params.erro === "1";
+  const hasLinkError = params.erro === "link";
 
   return (
     <main className="grid min-h-dvh place-items-center bg-event-paper px-4 py-8">
@@ -18,6 +19,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
         </div>
         {params.sucesso === "senha" ? <div className="mb-4"><FlashMessage>Senha atualizada. Entre com a nova senha.</FlashMessage></div> : null}
         {hasLoginError ? <div className="mb-4"><FlashMessage variant="error">E-mail ou senha incorretos. Confira os dados e tente novamente.</FlashMessage></div> : null}
+        {hasLinkError ? <div className="mb-4"><FlashMessage variant="error">Este link expirou ou já foi usado. Solicite um novo convite ou recupere sua senha.</FlashMessage></div> : null}
         <form action={login} className="grid gap-4">
           <label className="grid gap-2 text-sm font-bold text-event-ink/75">
             <span>E-mail <span className="text-event-rose" aria-hidden="true">*</span></span>

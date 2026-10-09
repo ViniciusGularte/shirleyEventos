@@ -1,0 +1,257 @@
+{
+  "engine": "Chatterbox Multilingual PT-BR",
+  "device": "cuda",
+  "source": "/home/vinicius/Downloads/WhatsApp Ptt 2026-10-04 at 18.41.06.ogg",
+  "reference": {
+    "snr_db": 25.16,
+    "speaker_consistency": 0.986
+  },
+  "chunks": [
+    {
+      "index": 0,
+      "text": "Neste vídeo, eu vou montar um casamento do zero com você. É simples: cliente, evento e financeiro.",
+      "duration_seconds": 6.92,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-00.wav"
+    },
+    {
+      "index": 1,
+      "text": "Primeiro, entre com o e-mail em que você recebeu o convite.",
+      "duration_seconds": 4.68,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-01.wav"
+    },
+    {
+      "index": 2,
+      "text": "Agora coloque a sua senha. Ela é pessoal, então não compartilhe com ninguém.",
+      "duration_seconds": 8.96,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-02.wav"
+    },
+    {
+      "index": 3,
+      "text": "Tudo certo? Clique em Entrar.",
+      "duration_seconds": 2.8,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-03.wav"
+    },
+    {
+      "index": 4,
+      "text": "Este é o seu painel. É aqui que você bate o olho e entende o que vendeu, o que recebeu e o que ainda falta entrar.",
+      "duration_seconds": 8.48,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-04.wav"
+    },
+    {
+      "index": 5,
+      "text": "Para não se perder, siga sempre esta ordem: primeiro o cliente, depois o evento e, por último, o financeiro.",
+      "duration_seconds": 8.08,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-05.wav"
+    },
+    {
+      "index": 6,
+      "text": "Aqui em Clientes, você guarda o contato de quem fechou o contrato.",
+      "duration_seconds": 5.32,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-06.wav"
+    },
+    {
+      "index": 7,
+      "text": "No nome, coloque uma identificação fácil. Vou usar Mariana Oliveira.",
+      "duration_seconds": 7.24,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-07.wav"
+    },
+    {
+      "index": 8,
+      "text": "Depois, o telefone. Assim você encontra o contato rápido quando precisar.",
+      "duration_seconds": 7.72,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-08.wav"
+    },
+    {
+      "index": 9,
+      "text": "E agora o e-mail, para contratos, propostas e outros documentos.",
+      "duration_seconds": 6.76,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-09.wav"
+    },
+    {
+      "index": 10,
+      "text": "Confira os três campos e clique em Novo cliente.",
+      "duration_seconds": 4.6,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-10.wav"
+    },
+    {
+      "index": 11,
+      "text": "Pronto. A faixa verde confirma que a Mariana foi cadastrada.",
+      "duration_seconds": 4.96,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-11.wav"
+    },
+    {
+      "index": 12,
+      "text": "Agora vamos criar o evento dela. Entre em Eventos e clique em Novo evento.",
+      "duration_seconds": 6.28,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-12.wav"
+    },
+    {
+      "index": 13,
+      "text": "Comece escolhendo a cliente. É isso que liga o evento ao cadastro da Mariana.",
+      "duration_seconds": 5.76,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-13.wav"
+    },
+    {
+      "index": 14,
+      "text": "Em Serviço, selecione exatamente o pacote que ela contratou.",
+      "duration_seconds": 5.2,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-14.wav"
+    },
+    {
+      "index": 15,
+      "text": "No título, use algo que você reconheça de primeira. Aqui vai ser Casamento Mariana e Lucas.",
+      "duration_seconds": 6.64,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-15.wav"
+    },
+    {
+      "index": 16,
+      "text": "Data da venda é o dia em que o contrato foi fechado.",
+      "duration_seconds": 5.0,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-16.wav"
+    },
+    {
+      "index": 17,
+      "text": "Data do evento é o dia da cerimônia. Escolha também o horário.",
+      "duration_seconds": 4.64,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-17.wav"
+    },
+    {
+      "index": 18,
+      "text": "Em Valor vendido, coloque o total do contrato, mesmo que o casal vá pagar parcelado.",
+      "duration_seconds": 6.48,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-18.wav"
+    },
+    {
+      "index": 19,
+      "text": "Em Recebido agora, entra só o dinheiro que já caiu. Neste exemplo, o sinal de mil reais.",
+      "duration_seconds": 6.56,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-19.wav"
+    },
+    {
+      "index": 20,
+      "text": "Se você já tem um custo de equipe previsto, registre aqui. Vou colocar quatrocentos reais.",
+      "duration_seconds": 6.16,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-20.wav"
+    },
+    {
+      "index": 21,
+      "text": "Agora escolha a conta onde o sinal entrou. Assim o saldo fica no lugar certo.",
+      "duration_seconds": 6.08,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-21.wav"
+    },
+    {
+      "index": 22,
+      "text": "Nas observações, anote o que você pode precisar depois. Horário, local ou algum combinado importante.",
+      "duration_seconds": 9.12,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-22.wav"
+    },
+    {
+      "index": 23,
+      "text": "Faça uma última conferência e clique em Salvar evento.",
+      "duration_seconds": 4.6,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-23.wav"
+    },
+    {
+      "index": 24,
+      "text": "Evento criado. Daqui para frente, todo valor que entra ou sai pode ficar ligado a este casamento.",
+      "duration_seconds": 8.52,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-24.wav"
+    },
+    {
+      "index": 25,
+      "text": "Vamos para o Financeiro registrar a próxima parcela.",
+      "duration_seconds": 3.88,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-25.wav"
+    },
+    {
+      "index": 26,
+      "text": "Em Recebimento, coloque o valor e a data em que o dinheiro realmente entrou.",
+      "duration_seconds": 6.0,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-26.wav"
+    },
+    {
+      "index": 27,
+      "text": "Agora ligue a parcela ao casamento e escolha a conta que recebeu o dinheiro.",
+      "duration_seconds": 5.72,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-27.wav"
+    },
+    {
+      "index": 28,
+      "text": "Na descrição, escreva algo curto e claro, como Segunda parcela. Depois, salve.",
+      "duration_seconds": 7.72,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-28.wav"
+    },
+    {
+      "index": 29,
+      "text": "Recebimento salvo. O caixa e o valor que falta receber já foram atualizados.",
+      "duration_seconds": 6.32,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-29.wav"
+    },
+    {
+      "index": 30,
+      "text": "Do outro lado ficam as despesas. Vou registrar cento e oitenta reais de material.",
+      "duration_seconds": 6.12,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-30.wav"
+    },
+    {
+      "index": 31,
+      "text": "Escolha a categoria, o evento e a conta de onde o dinheiro saiu.",
+      "duration_seconds": 6.16,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-31.wav"
+    },
+    {
+      "index": 32,
+      "text": "Na descrição, vou colocar Material de apoio. Agora é só adicionar a despesa.",
+      "duration_seconds": 6.04,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-32.wav"
+    },
+    {
+      "index": 33,
+      "text": "Despesa salva. É esse cuidado que mostra o lucro real, e não só o valor da venda.",
+      "duration_seconds": 6.88,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-33.wav"
+    },
+    {
+      "index": 34,
+      "text": "Mais abaixo estão as Contas. Elas mostram onde o dinheiro está: banco, caixa ou outra carteira.",
+      "duration_seconds": 7.48,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-34.wav"
+    },
+    {
+      "index": 35,
+      "text": "Na Distribuição, você define quanto do resultado vai para cada objetivo, como pró-labore, empresa e reserva.",
+      "duration_seconds": 9.4,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-35.wav"
+    },
+    {
+      "index": 36,
+      "text": "Para fechar, volte ao Início e confira o resumo.",
+      "duration_seconds": 4.6,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-36.wav"
+    },
+    {
+      "index": 37,
+      "text": "Vendido é o valor total dos contratos. Recebido é o que já entrou. A receber é o que ainda está pendente.",
+      "duration_seconds": 7.52,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-37.wav"
+    },
+    {
+      "index": 38,
+      "text": "No resultado, o sistema já desconta as despesas. Logo abaixo, ele mostra como esse valor foi distribuído.",
+      "duration_seconds": 7.6,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-38.wav"
+    },
+    {
+      "index": 39,
+      "text": "O segredo é simples: recebeu, registre. Gastou, registre. Assim o painel sempre mostra a realidade.",
+      "duration_seconds": 7.08,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-39.wav"
+    },
+    {
+      "index": 40,
+      "text": "Pronto. Cadastre o cliente, crie o evento e mantenha o financeiro em dia. O restante, o sistema organiza para você.",
+      "duration_seconds": 8.0,
+      "file": "/tmp/eventos-shirley-chatterbox/raw-40.wav"
+    }
+  ]
+}

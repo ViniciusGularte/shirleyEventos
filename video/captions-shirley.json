@@ -1,0 +1,289 @@
+[
+  {
+    "text": "Neste vídeo, eu vou montar um casamento do zero com você. É simples: cliente, evento e financeiro.",
+    "startMs": 3783,
+    "endMs": 11458,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Primeiro, entre com o e-mail em que você recebeu o convite.",
+    "startMs": 11558,
+    "endMs": 16869,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Agora coloque a sua senha. Ela é pessoal, então não compartilhe com ninguém.",
+    "startMs": 16969,
+    "endMs": 26796,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Tudo certo? Clique em Entrar.",
+    "startMs": 26896,
+    "endMs": 35210,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Este é o seu painel. É aqui que você bate o olho e entende o que vendeu, o que recebeu e o que ainda falta entrar.",
+    "startMs": 35310,
+    "endMs": 44629,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Para não se perder, siga sempre esta ordem: primeiro o cliente, depois o evento e, por último, o financeiro.",
+    "startMs": 44729,
+    "endMs": 53628,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Aqui em Clientes, você guarda o contato de quem fechou o contrato.",
+    "startMs": 53728,
+    "endMs": 59714,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "No nome, coloque uma identificação fácil. Vou usar Mariana Oliveira.",
+    "startMs": 59814,
+    "endMs": 67827,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Depois, o telefone. Assim você encontra o contato rápido quando precisar.",
+    "startMs": 67927,
+    "endMs": 76444,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "E agora o e-mail, para contratos, propostas e outros documentos.",
+    "startMs": 76544,
+    "endMs": 84050,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Confira os três campos e clique em Novo cliente.",
+    "startMs": 84150,
+    "endMs": 89377,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Pronto. A faixa verde confirma que a Mariana foi cadastrada.",
+    "startMs": 89477,
+    "endMs": 95084,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Agora vamos criar o evento dela. Entre em Eventos e clique em Novo evento.",
+    "startMs": 95184,
+    "endMs": 102184,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Comece escolhendo a cliente. É isso que liga o evento ao cadastro da Mariana.",
+    "startMs": 102284,
+    "endMs": 108735,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Em Serviço, selecione exatamente o pacote que ela contratou.",
+    "startMs": 108835,
+    "endMs": 114695,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "No título, use algo que você reconheça de primeira. Aqui vai ser Casamento Mariana e Lucas.",
+    "startMs": 114795,
+    "endMs": 122172,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Data da venda é o dia em que o contrato foi fechado.",
+    "startMs": 122272,
+    "endMs": 127922,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Data do evento é o dia da cerimônia. Escolha também o horário.",
+    "startMs": 128022,
+    "endMs": 135167,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Em Valor vendido, coloque o total do contrato, mesmo que o casal vá pagar parcelado.",
+    "startMs": 135267,
+    "endMs": 142477,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Em Recebido agora, entra só o dinheiro que já caiu. Neste exemplo, o sinal de mil reais.",
+    "startMs": 142577,
+    "endMs": 149872,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Se você já tem um custo de equipe previsto, registre aqui. Vou colocar quatrocentos reais.",
+    "startMs": 149972,
+    "endMs": 156845,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Agora escolha a conta onde o sinal entrou. Assim o saldo fica no lugar certo.",
+    "startMs": 156945,
+    "endMs": 163734,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Nas observações, anote o que você pode precisar depois. Horário, local ou algum combinado importante.",
+    "startMs": 163834,
+    "endMs": 173828,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Faça uma última conferência e clique em Salvar evento.",
+    "startMs": 173928,
+    "endMs": 182697,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Evento criado. Daqui para frente, todo valor que entra ou sai pode ficar ligado a este casamento.",
+    "startMs": 182797,
+    "endMs": 192159,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Vamos para o Financeiro registrar a próxima parcela.",
+    "startMs": 192259,
+    "endMs": 196728,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Em Recebimento, coloque o valor e a data em que o dinheiro realmente entrou.",
+    "startMs": 196828,
+    "endMs": 203530,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Agora ligue a parcela ao casamento e escolha a conta que recebeu o dinheiro.",
+    "startMs": 203630,
+    "endMs": 210038,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Na descrição, escreva algo curto e claro, como Segunda parcela. Depois, salve.",
+    "startMs": 210138,
+    "endMs": 218656,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Recebimento salvo. O caixa e o valor que falta receber já foram atualizados.",
+    "startMs": 218756,
+    "endMs": 225798,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Do outro lado ficam as despesas. Vou registrar cento e oitenta reais de material.",
+    "startMs": 225898,
+    "endMs": 232728,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Escolha a categoria, o evento e a conta de onde o dinheiro saiu.",
+    "startMs": 232828,
+    "endMs": 239701,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Na descrição, vou colocar Material de apoio. Agora é só adicionar a despesa.",
+    "startMs": 239801,
+    "endMs": 246547,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Despesa salva. É esse cuidado que mostra o lucro real, e não só o valor da venda.",
+    "startMs": 246647,
+    "endMs": 255864,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Mais abaixo estão as Contas. Elas mostram onde o dinheiro está: banco, caixa ou outra carteira.",
+    "startMs": 255964,
+    "endMs": 264227,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Na Distribuição, você define quanto do resultado vai para cada objetivo, como pró-labore, empresa e reserva.",
+    "startMs": 264327,
+    "endMs": 276541,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Para fechar, volte ao Início e confira o resumo.",
+    "startMs": 276641,
+    "endMs": 281869,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Vendido é o valor total dos contratos. Recebido é o que já entrou. A receber é o que ainda está pendente.",
+    "startMs": 281969,
+    "endMs": 291754,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "No resultado, o sistema já desconta as despesas. Logo abaixo, ele mostra como esse valor foi distribuído.",
+    "startMs": 291854,
+    "endMs": 300244,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "O segredo é simples: recebeu, registre. Gastou, registre. Assim o painel sempre mostra a realidade.",
+    "startMs": 300344,
+    "endMs": 308186,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Pronto. Cadastre o cliente, crie o evento e mantenha o financeiro em dia. O restante, o sistema organiza para você.",
+    "startMs": 308286,
+    "endMs": 317200,
+    "timestampMs": null,
+    "confidence": null
+  }
+]

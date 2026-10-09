@@ -24,7 +24,7 @@ export function Field({ label, name, type = "text", required = false, children, 
     "aria-describedby": error ? errorId : undefined
   };
   const control = children && isValidElement(children)
-    ? cloneElement(children as ReactElement<Record<string, unknown>>, controlProps)
+    ? cloneElement(children as ReactElement<Record<string, unknown>>, { name, required, ...controlProps })
     : <input className="focus-ring min-h-12 w-full rounded-[16px] border border-event-ink/15 bg-event-paper px-4 text-base text-event-ink aria-[invalid=true]:border-red-400 aria-[invalid=true]:bg-red-50 sm:text-sm" name={name} type={type} required={required} {...inputProps} {...controlProps} />;
 
   return (
