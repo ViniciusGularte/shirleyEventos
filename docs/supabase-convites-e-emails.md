@@ -69,11 +69,11 @@ Os templates **Confirm signup**, **Magic link**, **Change email** e **Reauthenti
 
 ### Authentication → URL Configuration
 
-- **Site URL:** `https://SEU-DOMINIO-DE-PRODUCAO`
+- **Site URL:** `https://sseventos.vercel.app`
 - **Redirect URLs de produção:**
-  - `https://SEU-DOMINIO-DE-PRODUCAO/definir-senha`
-  - `https://SEU-DOMINIO-DE-PRODUCAO/auth/confirm`
-  - `https://SEU-DOMINIO-DE-PRODUCAO/auth/callback`
+  - `https://sseventos.vercel.app/definir-senha`
+  - `https://sseventos.vercel.app/auth/confirm`
+  - `https://sseventos.vercel.app/auth/callback`
 - **Desenvolvimento:** `http://localhost:3000/**`
 
 Use URLs exatas em produção. Curingas devem ficar restritos ao desenvolvimento ou a previews controlados.
@@ -102,21 +102,23 @@ O serviço de e-mail padrão do Supabase é indicado apenas para testes, tem lim
 NEXT_PUBLIC_SUPABASE_URL=https://hfnwpzglvbzkvhrcwmet.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=...
 SUPABASE_SERVICE_ROLE_KEY=...
-NEXT_PUBLIC_APP_URL=https://SEU-DOMINIO-DE-PRODUCAO
+NEXT_PUBLIC_APP_URL=https://sseventos.vercel.app
 ```
 
 `SUPABASE_SERVICE_ROLE_KEY` deve existir somente no servidor/hosting. Nunca exponha essa chave no navegador nem use o prefixo `NEXT_PUBLIC_` nela.
 
-## Estado encontrado em 05/10/2026
+## Estado conferido em 12/10/2026
 
-- `NEXT_PUBLIC_APP_URL` local ainda está como `http://localhost:3000`;
+- o domínio de produção `https://sseventos.vercel.app` está publicado e redireciona corretamente para `/login`;
+- `NEXT_PUBLIC_APP_URL` local permanece como `http://localhost:3000`, que é o valor correto para desenvolvimento;
+- o valor de produção dessa variável precisa ser configurado na Vercel como `https://sseventos.vercel.app`;
 - cadastro por e-mail está liberado no projeto remoto (`disable_signup: false`);
 - confirmação automática de e-mail está ativa (`mailer_autoconfirm: true`);
 - o provedor de e-mail está ativo e os provedores sociais estão desligados.
 
 O prazo atual de **Email OTP Expiration** não é exposto pelo endpoint público do projeto. Até ele ser conferido no painel, considere o padrão do Supabase de 1 hora; o campo `expires_at` do sistema foi alinhado para 24 horas e requer a configuração `86400` no painel.
 
-Antes de convidar a Shirley em produção, altere a URL pública, feche o cadastro público, configure SMTP e publique os dois templates obrigatórios acima.
+Antes de enviar convites reais em produção, configure a URL pública na Vercel e no Supabase, feche o cadastro público, configure SMTP e publique os dois templates obrigatórios acima.
 
 ## Teste final recomendado
 
